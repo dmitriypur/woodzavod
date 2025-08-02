@@ -206,16 +206,16 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
 
-            <div class="swiper-reviews-pagination flex items-center justify-center mt-6"></div>
+                <div class="swiper-reviews-pagination flex items-center justify-center mt-6"></div>
 
-            <div class="swiper-reviews-next hidden md:block text-4xl text-secondary absolute top-1/2 -right-6 -translate-y-1/2 cursor-pointer">
-                <i class="ri-arrow-right-s-line"></i>
-            </div>
+                <div class="swiper-reviews-next hidden md:block text-4xl text-secondary absolute top-1/2 -right-6 -translate-y-1/2 cursor-pointer">
+                    <i class="ri-arrow-right-s-line"></i>
+                </div>
 
-            <div class="swiper-reviews-prev hidden md:block text-4xl text-secondary absolute top-1/2 -left-6 -translate-y-1/2 cursor-pointer">
-                <i class="ri-arrow-left-s-line"></i>
+                <div class="swiper-reviews-prev hidden md:block text-4xl text-secondary absolute top-1/2 -left-6 -translate-y-1/2 cursor-pointer">
+                    <i class="ri-arrow-left-s-line"></i>
+                </div>
             </div>
 
         </div>
