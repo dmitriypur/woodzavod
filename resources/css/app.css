@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero-bg {
+    background: linear-gradient(rgba(37, 42, 90, 0.7), rgba(37, 42, 90, 0.5)),
+    url('../images/hero.webp') center/cover;
+}
+.parallax {
+    transform: translateY(var(--scroll, 0));
+}
+@keyframes scroll {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+.scroll-arrow {
+    animation: scroll 2s infinite;
+}
