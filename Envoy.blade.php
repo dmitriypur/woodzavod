@@ -47,7 +47,7 @@ APP_NAME="Деревянное домостроение"
 APP_ENV=production
 APP_KEY=base64:GENERATE_NEW_KEY
 APP_DEBUG=false
-APP_URL=https://derevyannoe-domostroenie.ru
+APP_URL=http://derevyannoe-domostroenie.ru
 
 LOG_CHANNEL=daily
 LOG_DEPRECATIONS_CHANNEL=null
