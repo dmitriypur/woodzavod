@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Components\SettingsTextInput;
-use App\Filament\Components\SettingsRichEditor;
 use App\Filament\Components\SettingsTextarea;
+use App\Filament\Components\SettingsTiptapEditor;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use Filament\Forms;
@@ -45,8 +45,11 @@ class PageResource extends Resource
                     ->rules(['alpha_dash'])
                     ->helperText('Используется в URL страницы'),
 
-                SettingsRichEditor::make('content')
-                    ->label('Содержимое')
+//                SettingsRichEditor::make('content')
+//                    ->label('Содержимое')
+//                    ->columnSpanFull(),
+
+                SettingsTiptapEditor::make('content')
                     ->columnSpanFull(),
 
                 Forms\Components\Toggle::make('is_published')
