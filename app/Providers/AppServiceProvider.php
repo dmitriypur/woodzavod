@@ -29,19 +29,8 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
         
-        // Доверие прокси серверам (nginx)
-        $this->app['request']->setTrustedProxies(
-            ['127.0.0.1', '::1'], // localhost
-            \Illuminate\Http\Request::HEADER_X_FORWARDED_FOR |
-            \Illuminate\Http\Request::HEADER_X_FORWARDED_HOST |
-            \Illuminate\Http\Request::HEADER_X_FORWARDED_PORT |
-            \Illuminate\Http\Request::HEADER_X_FORWARDED_PROTO
-        );
-        
-        View::composer('layouts.app', function ($view) {
-            $settings = app(GeneralSettings::class);
-            $view->with('settings', $settings);
-        });
+        // Глобальная переменная settings для всех шаблонов
+        View::share('settings', app(GeneralSettings::class));
 
         // Blade директива для замены переменных настроек
         Blade::directive('settings', function ($expression) {

@@ -138,7 +138,7 @@ sudo service php8.3-fpm restart
 {{ logMessage("🚾  Cleaning up old releases...") }}
 # Delete all but the 3 most recent.
 cd {{ $releasesDir }}
-ls -dt {{ $releasesDir }}/* | tail -n +4 | xargs -d "\n" sudo chown -R forge .
+ls -dt {{ $releasesDir }}/* | tail -n +4 | xargs -d "\n" sudo chown -R root .
 ls -dt {{ $releasesDir }}/* | tail -n +4 | xargs -d "\n" rm -rf
 @endtask
 
@@ -155,6 +155,6 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 php artisan event:cache
-sudo service php8.1-fpm restart
+sudo service php8.3-fpm restart
 sudo service supervisor restart all
 @endtask

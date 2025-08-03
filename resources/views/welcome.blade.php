@@ -236,15 +236,15 @@
             <div class="flex flex-col sm:flex-row justify-center gap-8">
                 <div class="text-center">
                     <span class="block font-semibold mb-2 text-primary">Телефон:</span>
-                    <a href="tel:+79001234567" class="text-white-custom">+7 (900) 123-45-67</a>
+                    <a href="tel:{{ App\Helpers\SettingsHelper::phoneDigitsOnly($settings->phone) }}" class="text-white-custom">{{ $settings->phone }}</a>
                 </div>
                 <div class="text-center">
                     <span class="block font-semibold mb-2 text-primary">WhatsApp:</span>
-                    <a href="https://wa.me/79001234567" class="text-white-custom">+7 (900) 123-45-67</a>
+                    <a href="https://wa.me/{{ App\Helpers\SettingsHelper::phoneDigitsOnly($settings->whatsapp) }}" class="text-white-custom">{{ $settings->whatsapp }}</a>
                 </div>
                 <div class="text-center">
                     <span class="block font-semibold mb-2 text-primary">Адрес:</span>
-                    <span class="text-white-custom">г. Киров, пр-т. Строителей, 15</span>
+                    <span class="text-white-custom">{{ $settings->address }}</span>
                 </div>
             </div>
         </div>

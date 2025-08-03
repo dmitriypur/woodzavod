@@ -31,6 +31,8 @@ class GeneralSettings extends Settings
 
     public ?string $favicon;
 
+    public string $whatsapp;
+
     public string $rutube;
 
 

@@ -31,6 +31,7 @@ class ManageGeneral extends SettingsPage
                 Forms\Components\Section::make('Основная информация')->schema([
                     TextInput::make('site_name')->label('Название сайта')->required(),
                     TextInput::make('phone')->label('Телефон')->required(),
+                    TextInput::make('whatsapp')->label('WhatsApp')->required(),
                     TextInput::make('email')->label('Email')->required(),
                     TextInput::make('vk')->label('Ссылка на VK')->required(),
                     TextInput::make('telegram')->label('Ссылка на Telegram')->required(),
