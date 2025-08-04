@@ -19,5 +19,12 @@ Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
 // Маршрут для AJAX отправки форм
 Route::post('/submit-form', [LeadController::class, 'submitForm'])->name('submit.form');
 
+// Маршрут для тестирования Telegram (только для разработки)
+Route::get('/test-telegram', function() {
+    $controller = new LeadController();
+    $result = $controller->testTelegramConnection();
+    return response()->json($result);
+})->name('test.telegram');
+
 // Маршрут для статических страниц (должен быть последним)
 Route::get('/{slug}', [PageController::class, 'page'])->name('page.show');

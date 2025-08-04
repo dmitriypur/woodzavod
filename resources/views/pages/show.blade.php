@@ -10,6 +10,9 @@
     @if(isset($page->seo['noindex']) && !!$page->seo['noindex'])
         <meta name="robots" content="noindex">
     @endif
+    @if(!empty($page->seo['description']))
+        <meta property="og:description" content="{{ $page->seo['description'] }}"/>
+    @endif
 @endpush
 @extends('layouts.app')
 

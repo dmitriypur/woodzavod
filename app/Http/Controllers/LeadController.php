@@ -124,6 +124,60 @@ class LeadController extends Controller
     }
 
     /**
+     * Test Telegram connection
+     *
+     * @return array
+     */
+    public function testTelegramConnection()
+    {
+        try {
+            $botToken = env('TELEGRAM_BOT_TOKEN');
+            $chatId = env('TELEGRAM_CHAT_ID');
+            
+            if (!$botToken || !$chatId) {
+                return [
+                    'success' => false,
+                    'message' => 'Telegram credentials not configured',
+                    'bot_token_exists' => !empty($botToken),
+                    'chat_id_exists' => !empty($chatId)
+                ];
+            }
+
+            // Проверяем бота
+            $botResponse = Http::timeout(10)->get("https://api.telegram.org/bot{$botToken}/getMe");
+            
+            if (!$botResponse->successful()) {
+                return [
+                    'success' => false,
+                    'message' => 'Bot token invalid',
+                    'bot_response' => $botResponse->body()
+                ];
+            }
+
+            // Отправляем тестовое сообщение
+            $testResponse = Http::timeout(10)->post("https://api.telegram.org/bot{$botToken}/sendMessage", [
+                'chat_id' => $chatId,
+                'text' => '🧪 Тест соединения с Telegram API - ' . now()->format('d.m.Y H:i:s')
+            ]);
+
+            return [
+                'success' => $testResponse->successful(),
+                'message' => $testResponse->successful() ? 'Test message sent successfully' : 'Failed to send test message',
+                'bot_info' => $botResponse->json(),
+                'test_response' => $testResponse->json(),
+                'status_code' => $testResponse->status()
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Exception occurred: ' . $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ];
+        }
+    }
+
+    /**
      * Send telegram notification
      *
      * @param Lead $lead
@@ -140,6 +194,12 @@ class LeadController extends Controller
                 return;
             }
 
+            Log::info('Sending Telegram notification', [
+                'bot_token_exists' => !empty($botToken),
+                'chat_id' => $chatId,
+                'lead_id' => $lead->id
+            ]);
+
             $houseName = $lead->house ? $lead->house->title : 'Не указан';
             
             $message = "🏠 *Новая заявка с сайта \"Деревянное домостроение\"*\n\n";
@@ -154,13 +214,30 @@ class LeadController extends Controller
             }
             $message .= "⏰ *Время:* " . $lead->created_at->format('d.m.Y H:i');
 
-            Http::post("https://api.telegram.org/bot{$botToken}/sendMessage", [
+            $response = Http::timeout(30)->post("https://api.telegram.org/bot{$botToken}/sendMessage", [
                 'chat_id' => $chatId,
                 'text' => $message,
                 'parse_mode' => 'Markdown'
             ]);
+
+            if ($response->successful()) {
+                Log::info('Telegram message sent successfully', [
+                    'lead_id' => $lead->id,
+                    'response_status' => $response->status()
+                ]);
+            } else {
+                Log::error('Telegram API error', [
+                    'lead_id' => $lead->id,
+                    'status' => $response->status(),
+                    'response' => $response->body()
+                ]);
+            }
         } catch (\Exception $e) {
-            Log::error('Telegram sending error: ' . $e->getMessage());
+            Log::error('Telegram sending error', [
+                'lead_id' => $lead->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
         }
     }
 }
