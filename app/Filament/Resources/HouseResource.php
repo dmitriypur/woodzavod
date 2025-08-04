@@ -99,12 +99,14 @@ class HouseResource extends Resource
                 Section::make('Изображения')->schema([
                     SpatieMediaLibraryFileUpload::make('main_image')
                         ->label('Главное изображение')
+                        ->directory('main')
                         ->collection('main')
                         ->image(),
 
                     SpatieMediaLibraryFileUpload::make('gallery')
                         ->label('Галерея')
                         ->collection('gallery')
+                        ->directory('gallery')
                         ->multiple()
                         ->image()
                         ->reorderable()
@@ -115,7 +117,7 @@ class HouseResource extends Resource
 
                     Forms\Components\TextInput::make('seo.canonical')
                         ->label('Канонический URL')
-                        ->prefix(config('app.url')),
+                        ->prefix(rtrim(config('app.url'), '/')),
 
                     SettingsTextarea::make('seo.description')
                         ->helperText(function (?string $state): string {
