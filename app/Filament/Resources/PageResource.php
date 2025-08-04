@@ -61,7 +61,7 @@ class PageResource extends Resource
 
                     Forms\Components\TextInput::make('seo.canonical')
                         ->label('Канонический URL')
-                        ->prefix(config('app.url') . '/'),
+                        ->prefix(config('app.url')),
 
                     SettingsTextarea::make('seo.description')
                         ->helperText(function (?string $state): string {

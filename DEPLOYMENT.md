@@ -4,6 +4,8 @@
 
 ## Предварительные требования
 
+php vendor/bin/envoy run deploy
+
 1. **Laravel Envoy установлен глобально:**
    ```bash
    composer global require laravel/envoy
