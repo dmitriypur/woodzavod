@@ -17,7 +17,6 @@ document.addEventListener('submit', function (e) {
  */
 function handleBitrixFormSubmit(form) {
     if (!validateBitrixForm(form)) return;
-
     const formData = prepareBitrixFormData(form);
     sendBitrixFormData(form, formData);
 }

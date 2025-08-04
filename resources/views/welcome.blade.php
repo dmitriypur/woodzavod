@@ -103,7 +103,7 @@
                         @endforeach
                     </div>
                 </div>
-        
+
 
                 <div class="swiper-projects-pagination flex items-center justify-center mt-4"></div>
 
@@ -226,9 +226,9 @@
         <div class="max-w-4xl mx-auto px-5 text-center">
             <h2 class="font-evolventa text-4xl font-semibold mb-4">Остались вопросы?</h2>
             <p class="text-xl mb-10 opacity-90">Оставьте заявку и мы свяжемся с вами в течение 15 минут</p>
-            <form class="flex flex-col sm:flex-row gap-4 justify-center mb-12" id="contactForm">
-                <input type="text" placeholder="Ваше имя" required class="px-4 py-3 rounded-lg font-montserrat min-w-0 flex-1 max-w-xs text-dark">
-                <input type="tel" placeholder="Телефон" required class="px-4 py-3 rounded-lg font-montserrat min-w-0 flex-1 max-w-xs text-dark">
+            <form id="modal-form" class="modal-form flex flex-col sm:flex-row gap-4 justify-center mb-12" id="contactForm">
+                <input type="text" name="name" placeholder="Ваше имя" data-required class="px-4 py-3 rounded-lg font-montserrat min-w-0 flex-1 max-w-xs text-dark">
+                <input type="tel" name="phone" placeholder="Телефон" data-required class="phone-input px-4 py-3 rounded-lg font-montserrat min-w-0 flex-1 max-w-xs text-dark">
                 <button type="submit" class="bg-primary hover:bg-primary-dark text-white-custom px-6 py-3 rounded-lg font-medium transition-all hover:-translate-y-0.5">
                     Заказать обратный звонок
                 </button>

@@ -20,11 +20,16 @@ Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
 Route::post('/submit-form', [LeadController::class, 'submitForm'])->name('submit.form');
 
 // Маршрут для тестирования Telegram (только для разработки)
-Route::get('/test-telegram', function() {
-    $controller = new LeadController();
-    $result = $controller->testTelegramConnection();
-    return response()->json($result);
-})->name('test.telegram');
+//Route::get('/test-telegram', function() {
+//    $controller = new LeadController();
+//    $result = $controller->testTelegramConnection();
+//    return response()->json($result);
+//})->name('test.telegram');
+//
+//Route::get('/telegram/get-id', function() {
+//    $updates = file_get_contents('https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/getUpdates');
+//    return response()->json(json_decode($updates, true));
+//});
 
 // Маршрут для статических страниц (должен быть последним)
 Route::get('/{slug}', [PageController::class, 'page'])->name('page.show');
