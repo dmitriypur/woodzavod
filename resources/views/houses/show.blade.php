@@ -10,6 +10,10 @@
     @if(isset($house->seo['noindex']) && !!$house->seo['noindex'])
         <meta name="robots" content="noindex">
     @endif
+    @if(isset($house->seo['description']) && !!$house->seo['description'])
+        <meta property="og:description" content="{{ $description }}"/>
+    @endif
+
 @endpush
 @extends('layouts.app')
 
@@ -193,7 +197,7 @@
                         <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Отправить заявку
                         </button>
-                    
+
                     </form>
                 </div>
             </div>

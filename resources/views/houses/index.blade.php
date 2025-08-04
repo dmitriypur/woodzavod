@@ -1,7 +1,10 @@
+@push('header-scripts')
+    <meta property="og:description" content="Каталог деревянных домов от производителя Деревянное домостроение"/>
+@endpush
 @extends('layouts.app')
 
 @section('title', 'Каталог домов')
-@section('meta_description', 'Каталог деревянных домов от производителя WoodZavod')
+@section('meta_description', 'Каталог деревянных домов от производителя Деревянное домостроение')
 @section('meta_keywords', 'деревянные дома, дома из бруса, каталог домов, купить дом')
 
 @section('content')

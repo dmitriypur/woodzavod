@@ -11,6 +11,23 @@
     <meta name="description" content="@yield('meta_description', 'Деревянные дома от производителя')">
     <meta name="keywords" content="@yield('meta_keywords', 'деревянные дома, дома из бруса, экологичное жилье')">
 
+    <meta property="og:title" content="{{ $title ?? $settings->site_name }}"/>
+    <meta property="og:image" content="{{ url('images/logo.png') }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ url()->current() }}"/>
+
+    @if ($settings->favicon)
+        <link rel="icon" type="{{ $settings->faviconMimeType() }}"
+              href="{{ 'storage/'. $settings->favicon }}">
+    @else
+        <link rel="icon" type="image/png" sizes="32x32"
+              href="{{ asset('icon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16"
+              href="{{ asset('icon/favicon-16x16.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180"
+              href="{{ asset('icon/apple-touch-icon.png') }}">
+    @endif
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
