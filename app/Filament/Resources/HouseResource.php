@@ -38,11 +38,9 @@ class HouseResource extends Resource
                         ->required()
                         ->maxLength(255),
 
-                    TextInput::make('slug')
-                        ->label('Слаг (URL)')
-                        ->disabled()
-                        ->dehydrated()
-                        ->unique(ignoreRecord: true),
+                    TextInput::make('subtitle')
+                        ->label('Подзаголовок')
+                        ->maxLength(255),
 
                     SettingsRichEditor::make('description')
                         ->label('Описание')
@@ -114,6 +112,12 @@ class HouseResource extends Resource
                 ]),
                 Section::make('SEO')->schema([
                     SettingsTextInput::make('seo.title'),
+
+                    TextInput::make('slug')
+                        ->label('Слаг (URL)')
+                        ->disabled()
+                        ->dehydrated()
+                        ->unique(ignoreRecord: true),
 
                     Forms\Components\TextInput::make('seo.canonical')
                         ->label('Канонический URL')

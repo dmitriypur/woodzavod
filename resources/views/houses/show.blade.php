@@ -26,7 +26,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Хлебные крошки -->
         <nav class="flex mb-6" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <ol class="inline-flex flex-wrap items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
                     <a href="{{ url('/') }}" class="text-gray-600 hover:text-gray-900">
                         Главная
@@ -55,7 +55,13 @@
 
         <!-- Заголовок и категории -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">{!! \App\Helpers\SettingsHelper::replaceVariables($house->title) !!}</h1>
+            <h1 class="text-xl md:text-3xl font-bold text-gray-900 mb-4">
+                {!! \App\Helpers\SettingsHelper::replaceVariables($house->title) !!}
+                @if(!empty($house->subtitle))
+                <span class="block text-lg md:text-2xl text-gray-500 font-medium">{!! \App\Helpers\SettingsHelper::replaceVariables($house->subtitle) !!}</span>
+                @endif
+
+            </h1>
             <div class="flex flex-wrap gap-2">
                 @foreach($house->categories as $category)
                     <a href="{{ route('catalog', ['category' => $category->slug]) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200">
@@ -99,7 +105,7 @@
                 <!-- Описание -->
                 <div class="mt-8">
                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Описание</h2>
-                    <div class="prose max-w-none">
+                    <div class="prose max-w-none space-y-4 [&_h2]:text-xl [&_h2]:text-gray-800 [&_h3]:text-gray-800 [&_h3]:text-lg [&_h2]:font-semibold [&_h3]:font-semibold text-gray-600 [&_ul]:list-disc [&_ul]:pl-4">
                         {!! \App\Helpers\SettingsHelper::replaceVariables($house->description) !!}
                     </div>
                 </div>
@@ -131,7 +137,7 @@
                         </li>
                         <li class="flex justify-between">
                             <span class="text-gray-600">Объем бруса:</span>
-                            <span class="font-medium">{{ $house->timber_volume }} м³</span>
+                            <span class="font-medium">{{ $house->brus_volume }} м³</span>
                         </li>
                         <li class="flex justify-between">
                             <span class="text-gray-600">Спальни:</span>

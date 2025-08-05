@@ -12,7 +12,7 @@ class House extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['title', 'slug', 'description', 'area_total', 'floor_count', 'brus_volume', 'bedroom_count', 'bathroom_count', 'is_published', 'price', 'old_price', 'seo'];
+    protected $fillable = ['title', 'subtitle', 'slug', 'description', 'area_total', 'floor_count', 'brus_volume', 'bedroom_count', 'bathroom_count', 'is_published', 'price', 'old_price', 'seo'];
 
     protected $casts = [
         'seo' => 'json',

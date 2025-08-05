@@ -68,9 +68,6 @@ class HouseController extends Controller
         // Получаем похожие дома из тех же категорий
         $similarHouses = House::where('id', '!=', $house->id)
             ->where('is_published', true)
-            ->whereHas('categories', function($query) use ($house) {
-                $query->whereIn('categories.id', $house->categories->pluck('id'));
-            })
             ->inRandomOrder()
             ->limit(3)
             ->get();
