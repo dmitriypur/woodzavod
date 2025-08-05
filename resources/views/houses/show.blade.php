@@ -10,9 +10,6 @@
     @if(isset($house->seo['noindex']) && !!$house->seo['noindex'])
         <meta name="robots" content="noindex">
     @endif
-    @if(!empty($house->seo['description']))
-        <meta property="og:description" content="{{ $house->seo['description'] }}"/>
-    @endif
 
 @endpush
 @extends('layouts.app')
