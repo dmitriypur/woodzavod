@@ -125,6 +125,8 @@
                     </li>
                     <li><a href="/contact" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Контакты</a>
                     </li>
+                    <li><a href="/sitemap.html" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Карта сайта</a>
+                    </li>
                     <li><a href="/policy" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Политика
                             конфиденциальности</a></li>
                 </ul>

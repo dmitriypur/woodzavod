@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
@@ -18,6 +19,13 @@ Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
 
 // Маршрут для AJAX отправки форм
 Route::post('/submit-form', [LeadController::class, 'submitForm'])->name('submit.form');
+
+// Карты сайта
+Route::middleware('cache.sitemap')->group(function () {
+    Route::get('/sitemap.html', [SitemapController::class, 'html'])->name('sitemap.html');
+    Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap.xml');
+    Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots.txt');
+});
 
 // Маршрут для тестирования Telegram (только для разработки)
 //Route::get('/test-telegram', function() {

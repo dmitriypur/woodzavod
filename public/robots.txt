@@ -1,2 +1,49 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Блокируем служебные директории Laravel
+Disallow: /admin/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /bootstrap/
+Disallow: /config/
+Disallow: /database/
+Disallow: /resources/
+Disallow: /routes/
+Disallow: /tests/
+Disallow: /app/
+Disallow: /.env
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /artisan
+Disallow: /phpunit.xml
+Disallow: /webpack.mix.js
+Disallow: /vite.config.js
+Disallow: /tailwind.config.js
+Disallow: /postcss.config.js
+
+# Блокируем временные и служебные файлы
+Disallow: /*.log
+Disallow: /*.tmp
+Disallow: /*~
+Disallow: /*.bak
+
+# Блокируем поисковые параметры
+Disallow: /*?
+Disallow: /*&
+Disallow: /*=
+
+# Разрешаем доступ к статическим ресурсам
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /sitemap.html
+
+# Карта сайта
+Sitemap: http://127.0.0.1:8000/sitemap.xml

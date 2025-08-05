@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\House;
+use App\Models\Page;
+use App\Observers\SitemapObserver;
 use App\Settings\GeneralSettings;
 use App\Helpers\SettingsHelper;
 use Illuminate\Support\Facades\View;
@@ -41,5 +45,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('phoneLink', function ($expression) {
             return "<?php echo '<a href=\"tel:' . App\\Helpers\\SettingsHelper::phoneDigitsOnly($expression) . '\">' . $expression . '</a>'; ?>";
         });
+
+        // Регистрация Observer для автоматического обновления карт сайта
+        Page::observe(SitemapObserver::class);
+        House::observe(SitemapObserver::class);
+        Category::observe(SitemapObserver::class);
     }
 }
