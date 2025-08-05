@@ -47,6 +47,11 @@
         <!-- Содержимое страницы -->
         <div class="prose max-w-none">
             {!! \App\Helpers\SettingsHelper::replaceVariables($page->content) !!}
+            @if($page->slug === 'contact')
+            <div class="w-full mt-10">
+                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad003ce172ea60d49c68d00756840f1bc0476ef950b8fb3c7f5f83965d44614d6&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=false"></script>
+            </div>
+            @endif
         </div>
 
         <!-- Если это страница контактов, добавляем форму обратной связи -->
