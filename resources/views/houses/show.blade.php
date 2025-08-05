@@ -70,12 +70,12 @@
             <div class="lg:col-span-2">
                 @if($house->getMedia('gallery')->count() > 2)
                     <!-- Swiper слайдер для галереи -->
-                    <div class="swiper house-gallery-swiper mb-6">
-                        <div class="swiper-wrapper">
+                    <div class="swiper house-gallery-swiper mb-6 h-[250px] md:h-[450px]">
+                        <div class="swiper-wrapper h-auto">
                             @foreach($house->getMedia('gallery') as $media)
-                                <div class="swiper-slide">
-                                    <div class="bg-gray-100 rounded-lg overflow-hidden">
-                                        <img src="{{ $media->getUrl() }}" alt="{{ $house->title }} - изображение {{ $loop->iteration }}" class="w-full h-auto object-cover">
+                                <div class="swiper-slide h-auto">
+                                    <div class="bg-gray-100 rounded-lg overflow-hidden h-full flex justify-center">
+                                        <img src="{{ $media->getUrl() }}" alt="{{ $house->title }} - изображение {{ $loop->iteration }}" class="w-auto h-full object-contain">
                                     </div>
                                 </div>
                             @endforeach

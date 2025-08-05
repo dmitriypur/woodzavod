@@ -29,19 +29,19 @@ class ManageGeneral extends SettingsPage
         return $form
             ->schema([
                 Forms\Components\Section::make('Основная информация')->schema([
-                    TextInput::make('site_name')->label('Название сайта')->required(),
-                    TextInput::make('phone')->label('Телефон')->required(),
-                    TextInput::make('whatsapp')->label('WhatsApp')->required(),
-                    TextInput::make('email')->label('Email')->required(),
-                    TextInput::make('vk')->label('Ссылка на VK')->required(),
-                    TextInput::make('telegram')->label('Ссылка на Telegram')->required(),
-                    TextInput::make('youtube')->label('Ссылка на YouTube'),
-                    TextInput::make('rutube')->label('Ссылка на RuTube'),
-                    TextInput::make('city')->label('Город')->required(),
-                    TextInput::make('postal_code')->label('Индекс')->required(),
-                    TextInput::make('address')->label('Адрес')->required(),
-                    TextInput::make('coordinates')->label('Координаты')->required(),
-                    TextInput::make('schedule')->label('Режим работы')->required(),
+                    TextInput::make('site_name')->label('Название сайта')->nullable(),
+                    TextInput::make('phone')->label('Телефон')->nullable(),
+                    TextInput::make('whatsapp')->label('WhatsApp')->nullable(),
+                    TextInput::make('email')->label('Email')->nullable(),
+                    TextInput::make('vk')->label('Ссылка на VK')->nullable(),
+                    TextInput::make('telegram')->label('Ссылка на Telegram')->nullable(),
+                    TextInput::make('youtube')->label('Ссылка на YouTube')->nullable(),
+                    TextInput::make('rutube')->label('Ссылка на RuTube')->nullable(),
+                    TextInput::make('city')->label('Город')->nullable(),
+                    TextInput::make('postal_code')->label('Индекс')->nullable(),
+                    TextInput::make('address')->label('Адрес')->nullable(),
+                    TextInput::make('coordinates')->label('Координаты')->nullable(),
+                    TextInput::make('schedule')->label('Режим работы')->nullable(),
                 ]),
                 Forms\Components\Section::make('Favicon')->schema([
                     Forms\Components\FileUpload::make('favicon')
@@ -50,7 +50,8 @@ class ManageGeneral extends SettingsPage
                         ->imageCropAspectRatio('1:1')
                         ->imageResizeTargetWidth('120')
                         ->imageResizeTargetHeight('120')
-                        ->label('favicon'),
+                        ->label('favicon')
+                        ->nullable(),
                 ]),
             ]);
     }

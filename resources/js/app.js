@@ -244,10 +244,10 @@ function initHouseGallerySwiper() {
                 slidesPerView: 1,
                 spaceBetween: 20,
                 loop: true,
-                autoplay: {
-                    delay: 4000,
-                    disableOnInteraction: false,
-                },
+                // autoplay: {
+                //     delay: 4000,
+                //     disableOnInteraction: false,
+                // },
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
