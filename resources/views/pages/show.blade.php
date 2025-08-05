@@ -45,7 +45,7 @@
         <h1 class="text-3xl font-bold text-gray-900 mb-8">{!! \App\Helpers\SettingsHelper::replaceVariables($page->title) !!}</h1>
 
         <!-- Содержимое страницы -->
-        <div class="prose max-w-none">
+        <div class="prose max-w-none space-y-4 [&_h2]:text-xl [&_h2]:text-gray-800 [&_h3]:text-gray-800 [&_h3]:text-lg [&_h2]:font-semibold [&_h3]:font-semibold text-gray-600 [&_ul]:list-disc [&_ul]:pl-4">
             {!! \App\Helpers\SettingsHelper::replaceVariables($page->content) !!}
             @if($page->slug === 'contact')
             <div class="w-full mt-10">
