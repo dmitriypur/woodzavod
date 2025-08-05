@@ -25,7 +25,8 @@ use Illuminate\Support\Str;
 class HouseResource extends Resource
 {
     protected static ?string $model = House::class;
-
+    protected static ?string $label = 'Дом';
+    protected static ?string $pluralLabel = 'Дома';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

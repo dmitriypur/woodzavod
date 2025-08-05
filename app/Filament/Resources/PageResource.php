@@ -20,6 +20,8 @@ use Filament\Notifications\Notification;
 class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
+    protected static ?string $label = 'Страница';
+    protected static ?string $pluralLabel = 'Страницы';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
