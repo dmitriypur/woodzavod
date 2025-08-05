@@ -18,6 +18,8 @@
 
 @section('title', \App\Helpers\SettingsHelper::replaceVariables($page->seo['title'] ?? $page->title))
 @section('meta_description', Str::limit(strip_tags(\App\Helpers\SettingsHelper::replaceVariables($page->seo['description'] ?? $page->content)), 160))
+@section('og_title', \App\Helpers\SettingsHelper::replaceVariables($page->seo['title'] ?? $page->title))
+@section('og_description', \App\Helpers\SettingsHelper::replaceVariables($page->seo['description'] ?? ''))
 
 @section('content')
 <div class="bg-white pt-40 pb-20">

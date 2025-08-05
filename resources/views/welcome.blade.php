@@ -1,7 +1,10 @@
+@push('header-scripts')
+    <link rel="canonical" href="{{ url()->current() }}">
+@endpush
 @extends('layouts.app')
 
 @section('title', 'Главная')
-@section('meta_description', 'Деревянные дома от производителя WoodZavod — каталог, отзывы, контакты, доставка и оплата.')
+@section('meta_description', 'Деревянные дома от производителя ДЕРЕВЯННОЕ ДОМОСТРОЕНИЕ — каталог, отзывы, контакты, доставка и оплата.')
 @section('meta_keywords', 'деревянные дома, дома из бруса, строительство, отзывы, контакты, доставка, оплата')
 
 @section('content')
@@ -234,18 +237,26 @@
                 </button>
             </form>
             <div class="flex flex-col sm:flex-row justify-center gap-8">
-                <div class="text-center">
-                    <span class="block font-semibold mb-2 text-primary">Телефон:</span>
-                    <a href="tel:{{ App\Helpers\SettingsHelper::phoneDigitsOnly($settings->phone) }}" class="text-white-custom">{{ $settings->phone }}</a>
-                </div>
-                <div class="text-center">
-                    <span class="block font-semibold mb-2 text-primary">WhatsApp:</span>
-                    <a href="https://wa.me/{{ App\Helpers\SettingsHelper::phoneDigitsOnly($settings->whatsapp) }}" class="text-white-custom">{{ $settings->whatsapp }}</a>
-                </div>
-                <div class="text-center">
-                    <span class="block font-semibold mb-2 text-primary">Адрес:</span>
-                    <span class="text-white-custom">{{ $settings->address }}</span>
-                </div>
+                @if($settings->phone)
+                    <a href="tel:{{ App\Helpers\SettingsHelper::phoneDigitsOnly($settings->phone) }}" target="_blank" class="text-center text-2xl border border-white-custom p-2 rounded-full w-10 h-10 flex items-center justify-center text-white-custom hover:bg-primary">
+                        <i class="ri-phone-fill"></i>
+                    </a>
+                @endif
+                @if($settings->whatsapp)
+                    <a href="https://wa.me/{{ App\Helpers\SettingsHelper::phoneDigitsOnly($settings->whatsapp) }}" target="_blank" class="text-center text-2xl border border-white-custom p-2 rounded-full w-10 h-10 flex items-center justify-center text-white-custom hover:bg-primary">
+                        <i class="ri-whatsapp-fill"></i>
+                    </a>
+                @endif
+                @if($settings->telegram)
+                    <a href="https://t.me/{{ $settings->telegram }}" target="_blank" class="text-center text-2xl border border-white-custom p-2 rounded-full w-10 h-10 flex items-center justify-center text-white-custom hover:bg-primary">
+                        <i class="ri-telegram-fill"></i>
+                    </a>
+                @endif
+                @if($settings->vk)
+                    <a href="{{ $settings->vk }}" target="_blank" class="text-center text-2xl border border-white-custom p-2 rounded-full w-10 h-10 flex items-center justify-center text-white-custom hover:bg-primary">
+                        <i class="ri-vk-fill"></i>
+                    </a>
+                @endif
             </div>
         </div>
     </section>

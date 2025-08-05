@@ -1,16 +1,18 @@
 @push('header-scripts')
-    <meta property="og:description" content="Каталог деревянных домов от производителя Деревянное домостроение"/>
+    <link rel="canonical" href="{{ url()->current() }}">
 @endpush
 @extends('layouts.app')
 
-@section('title', 'Каталог домов')
-@section('meta_description', 'Каталог деревянных домов от производителя Деревянное домостроение')
-@section('meta_keywords', 'деревянные дома, дома из бруса, каталог домов, купить дом')
+@section('title', 'Каталог деревянных домов от производителя | Деревянное домостроение')
+@section('og_title', 'Каталог деревянных домов от производителя | Деревянное домостроение')
+@section('og_description', '✅ Каталог готовых проектов деревянных домов от производителя. Дома из бруса под ключ с гарантией качества. Цены от застройщика без переплат. Бесплатная консультация!')
+@section('meta_description', '✅ Каталог готовых проектов деревянных домов от производителя. Дома из бруса под ключ с гарантией качества. Цены от застройщика без переплат. Бесплатная консультация!')
+@section('meta_keywords', 'деревянные дома, дома из бруса, каталог домов, купить дом, проекты домов, дома под ключ, строительство домов, цены на дома, готовые проекты, деревянное строительство')
 
 @section('content')
 <div class="bg-white py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-8">Каталог домов</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Каталог деревянных домов от производителя</h1>
 
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Фильтры и категории -->
@@ -107,6 +109,30 @@
                         <p class="text-gray-600">По вашему запросу не найдено ни одного дома. Попробуйте изменить параметры фильтрации.</p>
                     </div>
                 @endif
+            </div>
+        </div>
+        <!-- SEO продающий текст -->
+        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 mt-8 border border-green-100">
+            <div class="max-w-4xl">
+                <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                    <strong class="text-green-700">Выберите идеальный дом из нашего каталога готовых проектов!</strong> 
+                    Мы предлагаем качественные деревянные дома из бруса с гарантией от производителя. 
+                    Все проекты разработаны с учетом современных требований к комфорту и энергоэффективности.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Цены от застройщика без переплат</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Строительство под ключ за 3-6 месяцев</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Гарантия качества 5 лет</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

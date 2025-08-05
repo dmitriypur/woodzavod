@@ -1,7 +1,7 @@
 @push('header-scripts')
     @if(isset($house->seo['canonical']) && $house->seo['canonical'] !== '')
         <link rel="canonical"
-              href="{{ url($house->seo['canonical']) }}">
+              href="{{ url('catalog/'. $house->seo['canonical']) }}">
     @else
         <link rel="canonical"
               href="{{ url()->current() }}">
@@ -19,9 +19,10 @@
 
 @section('title', \App\Helpers\SettingsHelper::replaceVariables($house->seo['title'] ?? $house->title))
 @section('meta_description', Str::limit(strip_tags(\App\Helpers\SettingsHelper::replaceVariables($house->seo['description'] ?? $house->content)), 160))
+@section('og_title', \App\Helpers\SettingsHelper::replaceVariables($house->seo['title'] ?? $house->title))
+@section('og_description', \App\Helpers\SettingsHelper::replaceVariables($house->seo['description'] ?? ''))
 
 @section('content')
-
 <div class="bg-white py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Хлебные крошки -->

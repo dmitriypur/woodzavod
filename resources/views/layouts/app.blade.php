@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', $settings->site_name) - {{ $settings->site_name }}</title>
+    <title>@yield('title', $settings->site_name)</title>
 
     <!-- Meta Tags -->
     <meta name="description" content="@yield('meta_description', 'Деревянные дома от производителя')">
     <meta name="keywords" content="@yield('meta_keywords', 'деревянные дома, дома из бруса, экологичное жилье')">
-
-    <meta property="og:title" content="{{ $title ?? $settings->site_name }}"/>
     <meta property="og:image" content="{{ url('images/logo.png') }}"/>
     <meta property="og:type" content="website"/>
+    <meta property="og:title" content="@yield('og_title', 'Деревянные дома от производителя')"/>
+    <meta property="og:description" content="@yield('og_description', '✅ Каталог готовых проектов деревянных домов от производителя. Дома из бруса под ключ с гарантией качества. Цены от застройщика без переплат. Бесплатная консультация!')"/>
     <meta property="og:url" content="{{ url()->current() }}"/>
+    <meta property="og:site_name" content="Деревянное домостроение"/>
+
+    <meta name="twitter:title" content="@yield('og_title', 'Деревянные дома от производителя')"/>
+    <meta name="twitter:description" content="@yield('og_description', '✅ Каталог готовых проектов деревянных домов от производителя. Дома из бруса под ключ с гарантией качества. Цены от застройщика без переплат. Бесплатная консультация!')"/>
 
     @if ($settings->favicon)
         <link rel="icon" type="{{ $settings->faviconMimeType() }}"
@@ -49,7 +53,7 @@
             @if(Request::is('/'))
                 <div class="flex items-center gap-3">
                     <img src="{{ asset('images/logo.svg') }}" alt="Деревянное домостроение" class="h-10 w-auto">
-                    <span class="font-evolventa font-semibold text-secondary text-lg">{{ $settings->site_name }}</span>
+                    <span class="hidden lg:block font-evolventa font-semibold text-secondary text-lg">{{ $settings->site_name }}</span>
                 </div>
             @else
                 <a href="{{ route('home') }}">
