@@ -162,6 +162,10 @@ class SchemaOrgService
                 ->ratingValue($review->rating)
                 ->bestRating(5)
                 ->worstRating(1)
+            )
+            ->itemReviewed(Schema::thing()
+                ->name('Строительство деревянных домов')
+                ->description('Услуги по строительству деревянных домов под ключ')
             );
 
         return $reviewSchema->toScript();
