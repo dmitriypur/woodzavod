@@ -87,7 +87,7 @@
                         @foreach($houses as $item)
                             <div class="swiper-slide !h-auto">
                                 
-                                <x-house-card :house="$item" :showSchema="true" />
+                                <x-house-card :house="$item" />
                             </div>
                         @endforeach
                     </div>

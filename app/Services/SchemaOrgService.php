@@ -162,15 +162,6 @@ class SchemaOrgService
                 ->ratingValue($review->rating)
                 ->bestRating(5)
                 ->worstRating(1)
-            )
-            ->itemReviewed(Schema::product()
-                ->name($review->house->title)
-                ->url(route('house.show', $review->house->slug))
-                ->offers(Schema::offer()
-                    ->priceCurrency('RUB')
-                    ->availability('https://schema.org/InStock')
-                    ->seller(Schema::organization()->name('Деревянное домостроение'))
-                )
             );
 
         return $reviewSchema->toScript();
