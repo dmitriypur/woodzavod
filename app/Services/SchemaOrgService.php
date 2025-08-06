@@ -72,15 +72,24 @@ class SchemaOrgService
             $product->image($house->getFirstMediaUrl('main'));
         }
 
+        // Всегда добавляем offer для валидности Schema.org Product
+        $offer = Schema::offer()
+            ->priceCurrency('RUB')
+            ->availability('https://schema.org/InStock')
+            ->seller(Schema::organization()->name('Деревянное домостроение'));
+            
         if ($house->price) {
-            $offer = Schema::offer()
-                ->price($house->price)
-                ->priceCurrency('RUB')
-                ->availability('https://schema.org/InStock')
-                ->seller(Schema::organization()->name('Деревянное домостроение'));
-
-            $product->offers($offer);
+            $offer->price($house->price);
+        } else {
+            // Если цена не указана, добавляем информацию о том, что цена по запросу
+            $offer->priceSpecification(
+                Schema::priceSpecification()
+                    ->priceCurrency('RUB')
+                    ->valueAddedTaxIncluded(true)
+            );
         }
+        
+        $product->offers($offer);
 
         // Добавляем характеристики дома
         $additionalProperties = [];
@@ -149,6 +158,11 @@ class SchemaOrgService
             ->author(Schema::person()->name($review->author))
             ->reviewBody($review->text)
             ->datePublished($review->created_at->toISOString())
+            ->reviewRating(Schema::rating()
+                ->ratingValue($review->rating)
+                ->bestRating(5)
+                ->worstRating(1)
+            )
             ->itemReviewed(Schema::product()
                 ->name($review->house->title)
                 ->url(route('house.show', $review->house->slug))

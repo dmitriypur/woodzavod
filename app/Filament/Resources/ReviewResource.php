@@ -47,6 +47,18 @@ class ReviewResource extends Resource
                     ->required()
                     ->rows(5),
 
+                Forms\Components\Select::make('rating')
+                    ->label('Рейтинг')
+                    ->options([
+                        1 => '1 звезда',
+                        2 => '2 звезды',
+                        3 => '3 звезды',
+                        4 => '4 звезды',
+                        5 => '5 звезд',
+                    ])
+                    ->default(5)
+                    ->required(),
+
                 SpatieMediaLibraryFileUpload::make('avatar')
                     ->label('Аватар')
                     ->collection('main')
@@ -76,6 +88,11 @@ class ReviewResource extends Resource
                     ->label('Текст')
                     ->limit(50)
                     ->searchable(),
+
+                Tables\Columns\TextColumn::make('rating')
+                    ->label('Рейтинг')
+                    ->formatStateUsing(fn (string $state): string => $state . ' ★')
+                    ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Опубликован')

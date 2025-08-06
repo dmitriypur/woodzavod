@@ -11,7 +11,7 @@ class Review extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['house_id', 'author', 'text', 'is_published'];
+    protected $fillable = ['house_id', 'author', 'text', 'rating', 'is_published'];
 
     public function house()
     {
