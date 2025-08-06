@@ -163,9 +163,13 @@ class SchemaOrgService
                 ->bestRating(5)
                 ->worstRating(1)
             )
-            ->itemReviewed(Schema::thing()
+            ->itemReviewed(Schema::service()
                 ->name('Строительство деревянных домов')
                 ->description('Услуги по строительству деревянных домов под ключ')
+                ->provider(Schema::localBusiness()
+                    ->name('Деревянное домостроение')
+                    ->url(url('/'))
+                )
             );
 
         return $reviewSchema->toScript();

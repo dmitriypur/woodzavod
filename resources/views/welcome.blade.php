@@ -86,7 +86,6 @@
                     <div class="swiper-wrapper">
                         @foreach($houses as $item)
                             <div class="swiper-slide !h-auto">
-                                
                                 <x-house-card :house="$item" />
                             </div>
                         @endforeach
