@@ -5,34 +5,75 @@ namespace App\Services;
 use App\Models\House;
 use App\Models\Review;
 use App\Models\Category;
+use App\Settings\GeneralSettings;
 use Spatie\SchemaOrg\Schema;
 use Spatie\SchemaOrg\Graph;
 use Illuminate\Support\Facades\URL;
 
 class SchemaOrgService
 {
+    public function __construct(
+        protected GeneralSettings $settings
+    ) {}
+
     /**
      * Генерирует микроразметку для организации
      */
     public function generateOrganization(): string
     {
         $organization = Schema::organization()
-            ->name('Деревянное домостроение')
+            ->name($this->settings->site_name ?? 'Деревянное домостроение')
             ->url(URL::to('/'))
             ->logo(asset('images/logo.png'))
-            ->description('Строительство деревянных домов из бруса в Московской области')
-            ->address(Schema::postalAddress()
-                ->addressCountry('RU')
-                ->addressRegion('Московская область')
-            )
-            ->contactPoint(Schema::contactPoint()
-                ->contactType('customer service')
-                ->areaServed('RU')
-                ->availableLanguage('ru')
-            )
-            ->sameAs([
-                // Добавить ссылки на соцсети если есть
-            ]);
+            ->description('Строительство деревянных домов из бруса в Кировской области');
+
+        // Добавляем адрес если есть данные
+        if ($this->settings->city || $this->settings->address) {
+            $address = Schema::postalAddress()
+                ->addressCountry('RU');
+            
+            if ($this->settings->city) {
+                $address->addressLocality($this->settings->city);
+            }
+            
+            if ($this->settings->address) {
+                $address->streetAddress($this->settings->address);
+            }
+            
+            if ($this->settings->postal_code) {
+                $address->postalCode($this->settings->postal_code);
+            }
+            
+            $organization->address($address);
+        }
+
+        // Добавляем контактную точку
+        $contactPoint = Schema::contactPoint()
+            ->contactType('customer service')
+            ->areaServed('RU')
+            ->availableLanguage('ru');
+            
+        if ($this->settings->phone) {
+            $contactPoint->telephone($this->settings->phone);
+        }
+        
+        if ($this->settings->email) {
+            $contactPoint->email($this->settings->email);
+        }
+        
+        $organization->contactPoint($contactPoint);
+
+        // Добавляем социальные сети
+        $sameAs = array_filter([
+            $this->settings->vk,
+            $this->settings->telegram,
+            $this->settings->youtube,
+            $this->settings->rutube,
+        ]);
+        
+        if (!empty($sameAs)) {
+            $organization->sameAs($sameAs);
+        }
 
         return $organization->toScript();
     }
@@ -43,9 +84,9 @@ class SchemaOrgService
     public function generateWebSite(): string
     {
         $website = Schema::webSite()
-            ->name('Деревянное домостроение')
+            ->name($this->settings->site_name ?? 'Деревянное домостроение')
             ->url(URL::to('/'))
-            ->description('Строительство деревянных домов из бруса в Московской области')
+            ->description('Строительство деревянных домов из бруса в Кировской области')
             ->inLanguage('ru')
             ->potentialAction(Schema::searchAction()
                 ->target(URL::to('/catalog?search={search_term_string}'))
@@ -66,7 +107,7 @@ class SchemaOrgService
             ->url(route('house.show', $house->slug))
             ->sku($house->id)
             ->category('Деревянные дома')
-            ->brand(Schema::brand()->name('Деревянное домостроение'));
+            ->brand(Schema::brand()->name($this->settings->site_name ?? 'Деревянное домостроение'));
 
         if ($house->hasMedia('main')) {
             $product->image($house->getFirstMediaUrl('main'));
@@ -76,7 +117,7 @@ class SchemaOrgService
         $offer = Schema::offer()
             ->priceCurrency('RUB')
             ->availability('https://schema.org/InStock')
-            ->seller(Schema::organization()->name('Деревянное домостроение'));
+            ->seller(Schema::organization()->name($this->settings->site_name ?? 'Деревянное домостроение'));
             
         if ($house->price) {
             $offer->price($house->price);
@@ -167,7 +208,7 @@ class SchemaOrgService
                 ->name('Строительство деревянных домов')
                 ->description('Услуги по строительству деревянных домов под ключ')
                 ->provider(Schema::localBusiness()
-                    ->name('Деревянное домостроение')
+                    ->name($this->settings->site_name ?? 'Деревянное домостроение')
                     ->url(url('/'))
                 )
             );
@@ -248,11 +289,11 @@ class SchemaOrgService
             ->url($url)
             ->inLanguage('ru')
             ->isPartOf(Schema::webSite()
-                ->name('Деревянное домостроение')
+                ->name($this->settings->site_name ?? 'Деревянное домостроение')
                 ->url(URL::to('/'))
             )
             ->publisher(Schema::organization()
-                ->name('Деревянное домостроение')
+                ->name($this->settings->site_name ?? 'Деревянное домостроение')
                 ->url(URL::to('/'))
             );
 
@@ -265,25 +306,63 @@ class SchemaOrgService
     public function generateLocalBusiness(): string
     {
         $localBusiness = Schema::localBusiness()
-            ->name('Деревянное домостроение')
-            ->description('Строительство деревянных домов из бруса в Московской области')
+            ->name($this->settings->site_name ?? 'Деревянное домостроение')
+            ->description('Строительство деревянных домов из бруса в Кировской области')
             ->url(URL::to('/'))
-            ->logo(asset('images/logo.png'))
-            ->address(Schema::postalAddress()
+            ->logo(asset('images/logo.png'));
+
+        // Добавляем адрес если есть данные
+        if ($this->settings->city || $this->settings->address) {
+            $address = Schema::postalAddress()
                 ->addressCountry('RU')
-                ->addressRegion('Московская область')
-            )
-            ->geo(Schema::geoCoordinates()
-                // Добавить координаты если есть
-                // ->latitude(55.7558)
-                // ->longitude(37.6176)
-            )
-            ->openingHours('Mo-Fr 09:00-18:00')
-            ->contactPoint(Schema::contactPoint()
-                ->contactType('customer service')
-                ->areaServed('RU')
-                ->availableLanguage('ru')
-            );
+                ->addressRegion('Кировской область');
+            
+            if ($this->settings->city) {
+                $address->addressLocality($this->settings->city);
+            }
+            
+            if ($this->settings->address) {
+                $address->streetAddress($this->settings->address);
+            }
+            
+            if ($this->settings->postal_code) {
+                $address->postalCode($this->settings->postal_code);
+            }
+            
+            $localBusiness->address($address);
+        }
+
+        // Добавляем координаты если есть
+        if ($this->settings->coordinates) {
+            $coords = explode(',', $this->settings->coordinates);
+            if (count($coords) === 2) {
+                $localBusiness->geo(Schema::geoCoordinates()
+                    ->latitude(trim($coords[0]))
+                    ->longitude(trim($coords[1]))
+                );
+            }
+        }
+
+        // Добавляем расписание если есть
+        if ($this->settings->schedule) {
+            $localBusiness->openingHours($this->settings->schedule);
+        }
+
+        // Добавляем контактную точку
+        $contactPoint = Schema::contactPoint()
+            ->contactType('customer service')
+            ->areaServed('RU')
+            ->availableLanguage('ru');
+            
+        if ($this->settings->phone) {
+            $contactPoint->telephone($this->settings->phone);
+        }
+        
+        if ($this->settings->email) {
+            $contactPoint->email($this->settings->email);
+        }
+        
+        $localBusiness->contactPoint($contactPoint);
 
         return $localBusiness->toScript();
     }
