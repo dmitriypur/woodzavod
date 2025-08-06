@@ -294,17 +294,8 @@ class SchemaOrgService
             ]
         ];
 
-        $listItems = [];
-        foreach ($navigationElements as $index => $element) {
-            $listItems[] = Schema::listItem()
-                ->position($index + 1)
-                ->name($element['name'])
-                ->item($element['url']);
-        }
-
         $siteNavigation = Schema::siteNavigationElement()
-            ->name('Основная навигация')
-            ->hasPart($listItems);
+            ->name('Основная навигация');
 
         return $siteNavigation->toScript();
     }
@@ -341,17 +332,8 @@ class SchemaOrgService
             ]
         ];
 
-        $listItems = [];
-        foreach ($footerElements as $index => $element) {
-            $listItems[] = Schema::listItem()
-                ->position($index + 1)
-                ->name($element['name'])
-                ->item($element['url']);
-        }
-
         $footerNavigation = Schema::siteNavigationElement()
-            ->name('Навигация подвала')
-            ->hasPart($listItems);
+            ->name('Навигация подвала');
 
         return $footerNavigation->toScript();
     }

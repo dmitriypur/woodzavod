@@ -73,17 +73,16 @@
                     </div>
                 </a>
             @endif
-            <nav class="hidden md:block absolute md:relative top-full left-0 right-0 bg-white md:bg-transparent" itemscope itemtype="https://schema.org/SiteNavigationElement">
-                <meta itemprop="name" content="Основная навигация">
+            <nav class="hidden md:block absolute md:relative top-full left-0 right-0 bg-white md:bg-transparent">
                 <ul class="flex flex-col md:flex-row gap-5 md:gap-8 p-4 md:p-0">
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="{{ route('home') }}" class="text-dark font-medium hover:text-primary transition-colors" itemprop="url"><span itemprop="name">Главная</span></a>
+                    <li><a href="{{ route('home') }}" class="text-dark font-medium hover:text-primary transition-colors">Главная</a>
                     </li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="/about" class="text-dark font-medium hover:text-primary transition-colors" itemprop="url"><span itemprop="name">О нас</span></a>
+                    <li><a href="/about" class="text-dark font-medium hover:text-primary transition-colors">О нас</a>
                     </li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="{{ route('catalog') }}"
-                           class="text-dark font-medium hover:text-primary transition-colors" itemprop="url"><span itemprop="name">Каталог</span></a></li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="/contact"
-                           class="text-dark font-medium hover:text-primary transition-colors" itemprop="url"><span itemprop="name">Контакты</span></a></li>
+                    <li><a href="{{ route('catalog') }}"
+                           class="text-dark font-medium hover:text-primary transition-colors">Каталог</a></li>
+                    <li><a href="/contact"
+                           class="text-dark font-medium hover:text-primary transition-colors">Контакты</a></li>
                 </ul>
             </nav>
             <div class="hidden md:block">
@@ -125,19 +124,19 @@
                     технологии.
                 </p>
             </div>
-            <div itemscope itemtype="https://schema.org/SiteNavigationElement">
-                <h4 class="font-evolventa text-primary mb-4" itemprop="name">Меню</h4>
+            <div>
+                <h4 class="font-evolventa text-primary mb-4">Меню</h4>
                 <ul class="space-y-2">
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="{{ route('home') }}"
-                           class="opacity-80 hover:opacity-100 hover:text-primary transition-all" itemprop="url"><span itemprop="name">Главная</span></a></li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="/about" class="opacity-80 hover:opacity-100 hover:text-primary transition-all" itemprop="url"><span itemprop="name">О нас</span></a></li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="{{ route('catalog') }}" class="opacity-80 hover:opacity-100 hover:text-primary transition-all" itemprop="url"><span itemprop="name">Каталог</span></a>
+                    <li><a href="{{ route('home') }}"
+                           class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Главная</a></li>
+                    <li><a href="/about" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">О нас</a></li>
+                    <li><a href="{{ route('catalog') }}" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Каталог</a>
                     </li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="/contact" class="opacity-80 hover:opacity-100 hover:text-primary transition-all" itemprop="url"><span itemprop="name">Контакты</span></a>
+                    <li><a href="/contact" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Контакты</a>
                     </li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="/sitemap.html" class="opacity-80 hover:opacity-100 hover:text-primary transition-all" itemprop="url"><span itemprop="name">Карта сайта</span></a>
+                    <li><a href="/sitemap.html" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Карта сайта</a>
                     </li>
-                    <li itemprop="hasPart" itemscope itemtype="https://schema.org/WebPage"><a href="/policy" class="opacity-80 hover:opacity-100 hover:text-primary transition-all" itemprop="url"><span itemprop="name">Политика конфиденциальности</span></a></li>
+                    <li><a href="/policy" class="opacity-80 hover:opacity-100 hover:text-primary transition-all">Политика конфиденциальности</a></li>
                 </ul>
             </div>
             <div>

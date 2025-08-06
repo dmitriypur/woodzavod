@@ -266,28 +266,7 @@
     </div>
 </div>
 
-<!-- Микроразметка Schema.org для товара -->
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "{{ $house->title }}",
-    "description": "{{ strip_tags($house->description) }}",
-    @if($house->hasMedia('main'))
-    "image": "{{ $house->getFirstMediaUrl('main') }}",
-    @endif
-    "offers": {
-        "@type": "Offer",
-        "priceCurrency": "RUB",
-        "price": "{{ $house->price }}",
-        "availability": "https://schema.org/InStock"
-    },
-    "brand": {
-        "@type": "Brand",
-        "name": "Деревянное домостроение"
-    }
-}
-</script>
+
 
 
 

@@ -33,12 +33,11 @@
 <div class="bg-white pt-40 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Хлебные крошки -->
-        <nav class="flex mb-6" aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <nav class="flex mb-6" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <meta itemprop="position" content="1">
-                    <a href="{{ url('/') }}" class="text-gray-600 hover:text-gray-900" itemprop="item">
-                        <span itemprop="name">Главная</span>
+                <li class="inline-flex items-center">
+                    <a href="{{ url('/') }}" class="text-gray-600 hover:text-gray-900">
+                        Главная
                     </a>
                 </li>
                 <li aria-current="page">
