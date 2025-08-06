@@ -5,6 +5,7 @@ use App\Http\Controllers\HouseController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SitemapRegenerateController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
@@ -27,17 +28,9 @@ Route::middleware('cache.sitemap')->group(function () {
     Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots.txt');
 });
 
-// Маршрут для тестирования Telegram (только для разработки)
-//Route::get('/test-telegram', function() {
-//    $controller = new LeadController();
-//    $result = $controller->testTelegramConnection();
-//    return response()->json($result);
-//})->name('test.telegram');
-//
-//Route::get('/telegram/get-id', function() {
-//    $updates = file_get_contents('https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/getUpdates');
-//    return response()->json(json_decode($updates, true));
-//});
+// API для регенерации карты сайта
+Route::get('/admin/sitemap/regenerate', [SitemapRegenerateController::class, 'regenerate'])->name('sitemap.regenerate');
+Route::get('/admin/sitemap/status', [SitemapRegenerateController::class, 'status'])->name('sitemap.status');
 
 // Маршрут для статических страниц (должен быть последним)
 Route::get('/{slug}', [PageController::class, 'page'])->name('page.show');

@@ -97,9 +97,9 @@ sed -i 's/pm.max_spare_servers = .*/pm.max_spare_servers = 15/' /etc/php/8.2/fpm
 systemctl restart php8.2-fpm
 
 echo_step "Создание структуры директорий..."
-mkdir -p /var/www/woodzavod/{releases,storage/{app,framework,logs}}
-chown -R www-data:www-data /var/www/woodzavod
-chmod -R 755 /var/www/woodzavod
+mkdir -p /var/www/Деревянное домостроение/{releases,storage/{app,framework,logs}}
+chown -R www-data:www-data /var/www/Деревянное домостроение
+chmod -R 755 /var/www/Деревянное домостроение
 
 echo_step "Настройка Nginx..."
 # Удаляем дефолтный сайт
@@ -107,8 +107,8 @@ rm -f /etc/nginx/sites-enabled/default
 
 # Копируем конфигурацию (предполагается что nginx.conf уже создан)
 if [ -f "nginx.conf" ]; then
-    cp nginx.conf /etc/nginx/sites-available/woodzavod
-    ln -sf /etc/nginx/sites-available/woodzavod /etc/nginx/sites-enabled/
+    cp nginx.conf /etc/nginx/sites-available/Деревянное домостроение
+    ln -sf /etc/nginx/sites-available/Деревянное домостроение /etc/nginx/sites-enabled/
     echo_info "Конфигурация Nginx скопирована"
 else
     echo_warning "Файл nginx.conf не найден. Создайте его вручную."
@@ -143,10 +143,10 @@ chown deploy:deploy /home/deploy/.ssh
 chmod 700 /home/deploy/.ssh
 
 echo_step "Настройка Supervisor для очередей Laravel..."
-cat > /etc/supervisor/conf.d/woodzavod-worker.conf << 'EOF'
-[program:woodzavod-worker]
+cat > /etc/supervisor/conf.d/Деревянное домостроение-worker.conf << 'EOF'
+[program:Деревянное домостроение-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /var/www/woodzavod/current/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+command=php /var/www/Деревянное домостроение/current/artisan queue:work --sleep=3 --tries=3 --max-time=3600
 autostart=true
 autorestart=true
 stopasgroup=true
@@ -154,7 +154,7 @@ killasgroup=true
 user=www-data
 numprocs=2
 redirect_stderr=true
-stdout_logfile=/var/www/woodzavod/storage/logs/worker.log
+stdout_logfile=/var/www/Деревянное домостроение/storage/logs/worker.log
 stopwaitsecs=3600
 EOF
 
@@ -162,8 +162,8 @@ supervisorctl reread
 supervisorctl update
 
 echo_step "Настройка логротации..."
-cat > /etc/logrotate.d/woodzavod << 'EOF'
-/var/www/woodzavod/storage/logs/*.log {
+cat > /etc/logrotate.d/Деревянное домостроение << 'EOF'
+/var/www/Деревянное домостроение/storage/logs/*.log {
     daily
     missingok
     rotate 14
@@ -177,7 +177,7 @@ cat > /etc/logrotate.d/woodzavod << 'EOF'
 EOF
 
 echo_step "Настройка cron для Laravel Scheduler..."
-(crontab -u www-data -l 2>/dev/null; echo "* * * * * cd /var/www/woodzavod/current && php artisan schedule:run >> /dev/null 2>&1") | crontab -u www-data -
+(crontab -u www-data -l 2>/dev/null; echo "* * * * * cd /var/www/Деревянное домостроение/current && php artisan schedule:run >> /dev/null 2>&1") | crontab -u www-data -
 
 echo_step "Оптимизация системы..."
 # Настройка swap если его нет
@@ -198,8 +198,8 @@ echo_step "Создание скрипта для получения SSL сер�
 cat > /root/setup-ssl.sh << 'EOF'
 #!/bin/bash
 # Получение SSL сертификата
-# Замените woodzavod.ru на ваш домен
-certbot --nginx -d woodzavod.ru -d www.woodzavod.ru --non-interactive --agree-tos --email admin@woodzavod.ru
+# Замените Деревянное домостроение.ru на ваш домен
+certbot --nginx -d Деревянное домостроение.ru -d www.Деревянное домостроение.ru --non-interactive --agree-tos --email admin@Деревянное домостроение.ru
 EOF
 chmod +x /root/setup-ssl.sh
 
@@ -217,7 +217,7 @@ echo "\n=== Использование памяти ==="
 free -h
 
 echo "\n=== Логи ошибок Nginx ==="
-tail -n 5 /var/log/nginx/woodzavod_error.log 2>/dev/null || echo "Логи не найдены"
+tail -n 5 /var/log/nginx/Деревянное домостроение_error.log 2>/dev/null || echo "Логи не найдены"
 
 echo "\n=== Процессы PHP-FPM ==="
 ps aux | grep php-fpm | grep -v grep | wc -l
@@ -233,13 +233,13 @@ echo "2. Добавьте SSH ключ для пользователя deploy:"
 echo "   sudo -u deploy ssh-keygen -t rsa -b 4096"
 echo "   cat /home/deploy/.ssh/id_rsa.pub"
 echo "3. Получите SSL сертификат: /root/setup-ssl.sh"
-echo "4. Создайте .env файл: /var/www/woodzavod/.env"
+echo "4. Создайте .env файл: /var/www/Деревянное домостроение/.env"
 echo "5. Настройте базу данных MySQL"
 echo "6. Выполните первый деплой"
 echo ""
 echo "🔧 Полезные команды:"
 echo "   Мониторинг: /root/monitor.sh"
-echo "   Логи Nginx: tail -f /var/log/nginx/woodzavod_error.log"
+echo "   Логи Nginx: tail -f /var/log/nginx/Деревянное домостроение_error.log"
 echo "   Логи PHP: tail -f /var/log/php8.2-fpm.log"
 echo "   Перезапуск: systemctl restart nginx php8.2-fpm"
 echo ""

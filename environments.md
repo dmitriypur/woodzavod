@@ -7,10 +7,10 @@
 ```apache
 # httpd.conf или .htaccess
 <VirtualHost *:80>
-    ServerName woodzavod.local
-    DocumentRoot "/Applications/MAMP/htdocs/woodzavod/public"
+    ServerName Деревянное домостроение.local
+    DocumentRoot "/Applications/MAMP/htdocs/Деревянное домостроение/public"
     
-    <Directory "/Applications/MAMP/htdocs/woodzavod/public">
+    <Directory "/Applications/MAMP/htdocs/Деревянное домостроение/public">
         AllowOverride All
         Require all granted
         
@@ -22,8 +22,8 @@
     </Directory>
     
     # Логирование
-    ErrorLog "/Applications/MAMP/logs/woodzavod_error.log"
-    CustomLog "/Applications/MAMP/logs/woodzavod_access.log" combined
+    ErrorLog "/Applications/MAMP/logs/Деревянное домостроение_error.log"
+    CustomLog "/Applications/MAMP/logs/Деревянное домостроение_access.log" combined
 </VirtualHost>
 ```
 
@@ -34,7 +34,7 @@ APP_NAME="Деревянное домостроение"
 APP_ENV=local
 APP_KEY=base64:GENERATE_KEY_HERE
 APP_DEBUG=true
-APP_URL=http://woodzavod.local
+APP_URL=http://Деревянное домостроение.local
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
@@ -43,7 +43,7 @@ LOG_LEVEL=debug
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=8889
-DB_DATABASE=woodzavod
+DB_DATABASE=Деревянное домостроение
 DB_USERNAME=root
 DB_PASSWORD=root
 
@@ -79,27 +79,27 @@ TELEGRAM_CHAT_ID=test_chat_id
 ```nginx
 server {
     listen 80;
-    server_name staging.woodzavod.com;
+    server_name staging.Деревянное домостроение.com;
     return 301 https://$server_name$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name staging.woodzavod.com;
-    root /var/www/woodzavod-staging/current/public;
+    server_name staging.Деревянное домостроение.com;
+    root /var/www/Деревянное домостроение-staging/current/public;
     index index.php;
     
     # SSL конфигурация
-    ssl_certificate /etc/letsencrypt/live/staging.woodzavod.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/staging.woodzavod.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/staging.Деревянное домостроение.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/staging.Деревянное домостроение.com/privkey.pem;
     
     # Базовая аутентификация для staging
     auth_basic "Staging Environment";
     auth_basic_user_file /etc/nginx/.htpasswd;
     
     # Логирование
-    access_log /var/log/nginx/staging_woodzavod_access.log;
-    error_log /var/log/nginx/staging_woodzavod_error.log;
+    access_log /var/log/nginx/staging_Деревянное домостроение_access.log;
+    error_log /var/log/nginx/staging_Деревянное домостроение_error.log;
     
     # Laravel конфигурация
     location / {
@@ -137,7 +137,7 @@ APP_NAME="Деревянное домостроение (Staging)"
 APP_ENV=staging
 APP_KEY=base64:STAGING_KEY_HERE
 APP_DEBUG=false
-APP_URL=https://staging.woodzavod.com
+APP_URL=https://staging.Деревянное домостроение.com
 
 LOG_CHANNEL=daily
 LOG_DEPRECATIONS_CHANNEL=null
@@ -146,8 +146,8 @@ LOG_LEVEL=info
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=woodzavod_staging
-DB_USERNAME=woodzavod_staging
+DB_DATABASE=Деревянное домостроение_staging
+DB_USERNAME=Деревянное домостроение_staging
 DB_PASSWORD=staging_password
 
 BROADCAST_DRIVER=log
@@ -168,7 +168,7 @@ MAIL_PORT=587
 MAIL_USERNAME=staging-email
 MAIL_PASSWORD=staging-password
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=staging@woodzavod.com
+MAIL_FROM_ADDRESS=staging@Деревянное домостроение.com
 MAIL_FROM_NAME="${APP_NAME}"
 
 # Staging Telegram для тестов
@@ -194,26 +194,26 @@ upstream php_backend {
 
 server {
     listen 80;
-    server_name woodzavod.com www.woodzavod.com;
-    return 301 https://woodzavod.com$request_uri;
+    server_name Деревянное домостроение.com www.Деревянное домостроение.com;
+    return 301 https://Деревянное домостроение.com$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name www.woodzavod.com;
-    return 301 https://woodzavod.com$request_uri;
+    server_name www.Деревянное домостроение.com;
+    return 301 https://Деревянное домостроение.com$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name woodzavod.com;
-    root /var/www/woodzavod/current/public;
+    server_name Деревянное домостроение.com;
+    root /var/www/Деревянное домостроение/current/public;
     index index.php;
     
     # SSL конфигурация
-    ssl_certificate /etc/letsencrypt/live/woodzavod.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/woodzavod.com/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/woodzavod.com/chain.pem;
+    ssl_certificate /etc/letsencrypt/live/Деревянное домостроение.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/Деревянное домостроение.com/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/Деревянное домостроение.com/chain.pem;
     
     # SSL настройки
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -238,8 +238,8 @@ server {
     add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'self';" always;
     
     # Логирование
-    access_log /var/log/nginx/woodzavod_access.log combined buffer=16k flush=2m;
-    error_log /var/log/nginx/woodzavod_error.log warn;
+    access_log /var/log/nginx/Деревянное домостроение_access.log combined buffer=16k flush=2m;
+    error_log /var/log/nginx/Деревянное домостроение_error.log warn;
     
     # Rate limiting
     location / {
@@ -332,7 +332,7 @@ APP_NAME="Деревянное домостроение"
 APP_ENV=production
 APP_KEY=base64:PRODUCTION_KEY_HERE
 APP_DEBUG=false
-APP_URL=https://woodzavod.com
+APP_URL=https://Деревянное домостроение.com
 
 LOG_CHANNEL=daily
 LOG_DEPRECATIONS_CHANNEL=null
@@ -342,8 +342,8 @@ LOG_DAYS=14
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=woodzavod
-DB_USERNAME=woodzavod
+DB_DATABASE=Деревянное домостроение
+DB_USERNAME=Деревянное домостроение
 DB_PASSWORD=very_strong_production_password
 
 BROADCAST_DRIVER=log
@@ -363,10 +363,10 @@ REDIS_DB=0
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.yandex.ru
 MAIL_PORT=465
-MAIL_USERNAME=info@woodzavod.com
+MAIL_USERNAME=info@Деревянное домостроение.com
 MAIL_PASSWORD=email_password
 MAIL_ENCRYPTION=ssl
-MAIL_FROM_ADDRESS=info@woodzavod.com
+MAIL_FROM_ADDRESS=info@Деревянное домостроение.com
 MAIL_FROM_NAME="${APP_NAME}"
 
 # Production Telegram
@@ -375,21 +375,21 @@ TELEGRAM_CHAT_ID=production_chat_id
 
 # Дополнительные настройки безопасности
 SESSION_SAME_SITE=strict
-SANCTUM_STATEFUL_DOMAINS=woodzavod.com
+SANCTUM_STATEFUL_DOMAINS=Деревянное домостроение.com
 
 # Мониторинг и аналитика
 GOOGLE_ANALYTICS_ID=GA_MEASUREMENT_ID
 YANDEX_METRICA_ID=YANDEX_COUNTER_ID
 
 # CDN (если используется)
-CDN_URL=https://cdn.woodzavod.com
+CDN_URL=https://cdn.Деревянное домостроение.com
 
 # Backup настройки
 BACKUP_DISK=s3
 AWS_ACCESS_KEY_ID=backup_access_key
 AWS_SECRET_ACCESS_KEY=backup_secret_key
 AWS_DEFAULT_REGION=eu-west-1
-AWS_BUCKET=woodzavod-backups
+AWS_BUCKET=Деревянное домостроение-backups
 ```
 
 ## Docker конфигурация (альтернатива)
@@ -404,21 +404,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: woodzavod_app
+    container_name: Деревянное домостроение_app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
       - ./:/var/www
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - woodzavod
+      - Деревянное домостроение
     depends_on:
       - db
       - redis
 
   nginx:
     image: nginx:alpine
-    container_name: woodzavod_nginx
+    container_name: Деревянное домостроение_nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -428,18 +428,18 @@ services:
       - ./docker/nginx:/etc/nginx/conf.d
       - ./docker/ssl:/etc/ssl/certs
     networks:
-      - woodzavod
+      - Деревянное домостроение
     depends_on:
       - app
 
   db:
     image: mysql:8.0
-    container_name: woodzavod_db
+    container_name: Деревянное домостроение_db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: woodzavod
+      MYSQL_DATABASE: Деревянное домостроение
       MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_USER: woodzavod
+      MYSQL_USER: Деревянное домостроение
       MYSQL_PASSWORD: db_password
     volumes:
       - dbdata:/var/lib/mysql
@@ -447,29 +447,29 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - woodzavod
+      - Деревянное домостроение
 
   redis:
     image: redis:alpine
-    container_name: woodzavod_redis
+    container_name: Деревянное домостроение_redis
     restart: unless-stopped
     ports:
       - "6379:6379"
     networks:
-      - woodzavod
+      - Деревянное домостроение
 
   queue:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: woodzavod_queue
+    container_name: Деревянное домостроение_queue
     restart: unless-stopped
     command: php artisan queue:work --sleep=3 --tries=3
     working_dir: /var/www
     volumes:
       - ./:/var/www
     networks:
-      - woodzavod
+      - Деревянное домостроение
     depends_on:
       - db
       - redis
@@ -479,7 +479,7 @@ volumes:
     driver: local
 
 networks:
-  woodzavod:
+  Деревянное домостроение:
     driver: bridge
 ```
 
@@ -585,7 +585,7 @@ volumes:
 #!/bin/bash
 # health-check.sh
 
-SITE_URL="https://woodzavod.com"
+SITE_URL="https://Деревянное домостроение.com"
 TELEGRAM_BOT_TOKEN="your_bot_token"
 TELEGRAM_CHAT_ID="your_chat_id"
 

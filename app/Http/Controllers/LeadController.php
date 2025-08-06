@@ -111,12 +111,12 @@ class LeadController extends Controller
     private function sendEmailNotification(Lead $lead)
     {
         try {
-            $adminEmail = env('ADMIN_EMAIL', 'admin@woodzavod.ru');
+            $adminEmail = env('ADMIN_EMAIL', 'admin@Деревянное домостроение.ru');
             
             Mail::send('emails.new-lead', ['lead' => $lead], function ($message) use ($adminEmail, $lead) {
                 $message->to($adminEmail)
-                        ->subject('Новая заявка с сайта WoodZavod')
-                        ->from(env('MAIL_FROM_ADDRESS', 'noreply@woodzavod.ru'), env('MAIL_FROM_NAME', 'WoodZavod'));
+                        ->subject('Новая заявка с сайта Деревянное домостроение')
+                        ->from(env('MAIL_FROM_ADDRESS', 'noreply@Деревянное домостроение.ru'), env('MAIL_FROM_NAME', 'Деревянное домостроение'));
             });
         } catch (\Exception $e) {
             Log::error('Email sending error: ' . $e->getMessage());

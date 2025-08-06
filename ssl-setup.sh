@@ -5,7 +5,7 @@
 
 set -e
 
-DOMAIN=${1:-woodzavod.ru}
+DOMAIN=${1:-Деревянное домостроение.ru}
 EMAIL=${2:-admin@$DOMAIN}
 
 # Цвета
@@ -129,7 +129,7 @@ EOF
 echo_info "Обновление конфигурации Nginx..."
 
 # Создаем улучшенную конфигурацию
-cat > /etc/nginx/sites-available/woodzavod << EOF
+cat > /etc/nginx/sites-available/Деревянное домостроение << EOF
 server {
     listen 80;
     listen [::]:80;
@@ -151,12 +151,12 @@ server {
     include /etc/nginx/snippets/security.conf;
     
     # Корневая директория
-    root /var/www/woodzavod/current/public;
+    root /var/www/Деревянное домостроение/current/public;
     index index.php index.html;
     
     # Логи
-    access_log /var/log/nginx/woodzavod_access.log;
-    error_log /var/log/nginx/woodzavod_error.log;
+    access_log /var/log/nginx/Деревянное домостроение_access.log;
+    error_log /var/log/nginx/Деревянное домостроение_error.log;
     
     # Rate limiting
     limit_req_zone \$binary_remote_addr zone=login:10m rate=5r/m;
@@ -278,12 +278,12 @@ maxretry = 3
 [nginx-http-auth]
 enabled = true
 port = http,https
-logpath = /var/log/nginx/woodzavod_error.log
+logpath = /var/log/nginx/Деревянное домостроение_error.log
 
 [nginx-limit-req]
 enabled = true
 port = http,https
-logpath = /var/log/nginx/woodzavod_error.log
+logpath = /var/log/nginx/Деревянное домостроение_error.log
 maxretry = 10
 EOF
 

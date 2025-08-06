@@ -4,7 +4,7 @@ require __DIR__.'/vendor/autoload.php';
 $branch = "main";
 $server = "77.222.42.47";
 $userAndServer = 'root@'. $server;
-$repository = "dmitriypur/woodzavod.git";
+$repository = "dmitriypur/Деревянное домостроение.git";
 $baseDir = "/var/www/derevyannoe-domostroenie.ru";
 $releasesDir = "{$baseDir}/releases";
 $currentDir = "{$baseDir}/current";

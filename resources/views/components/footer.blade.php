@@ -4,7 +4,7 @@
             <div>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">О компании</h3>
                 <p class="text-gray-600 dark:text-gray-300 mb-4">
-                    WoodZavod - производитель качественных деревянных домов из экологически чистых материалов. Мы строим дома вашей мечты с 2010 года.
+                    Деревянное домостроение - производитель качественных деревянных домов из экологически чистых материалов. Мы строим дома вашей мечты с 2010 года.
                 </p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -66,14 +66,14 @@
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
-                        <a href="mailto:info@woodzavod.ru" class="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">info@woodzavod.ru</a>
+                        <a href="mailto:info@Деревянное домостроение.ru" class="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">info@Деревянное домостроение.ru</a>
                     </li>
                 </ul>
             </div>
         </div>
         
         <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center text-gray-500 dark:text-gray-400">
-            <p>&copy; {{ date('Y') }} WoodZavod. Все права защищены.</p>
+            <p>&copy; {{ date('Y') }} Деревянное домостроение. Все права защищены.</p>
         </div>
     </div>
 </footer>

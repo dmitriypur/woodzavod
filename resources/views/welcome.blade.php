@@ -1,6 +1,14 @@
 @push('header-scripts')
     <link rel="canonical" href="{{ url()->current() }}">
 @endpush
+@push('schema-org')
+    @inject('schemaService', 'App\Services\SchemaOrgService')
+    {!! $schemaService->generateLocalBusiness() !!}
+    @if(isset($houses) && $houses->count() > 0)
+        {!! $schemaService->generateItemList($houses, 'Популярные проекты домов') !!}
+    @endif
+@endpush
+
 @extends('layouts.app')
 
 @section('title', 'Деревянные дома под ключ от производителя | Строительство домов из бруса - Деревянное домостроение')
@@ -78,30 +86,8 @@
                     <div class="swiper-wrapper">
                         @foreach($houses as $item)
                             <div class="swiper-slide !h-auto">
-                                <div class="bg-white-custom rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-transform">
-                                    <div class="h-48 overflow-hidden">
-                                        <a href="{{ route('house.show', $item->slug) }}">
-                                        @if($item->hasMedia('main'))
-                                            <img data-src="{{ $item->getFirstMediaUrl('main') }}" alt="{{ $item->title }}" class="w-full h-48 object-cover">
-                                        @else
-                                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                                <span class="text-gray-400">Нет изображения</span>
-                                            </div>
-                                        @endif
-                                        </a>
-                                    </div>
-                                    <div class="p-6">
-                                        <h3 class="font-evolventa text-xl text-secondary mb-4"><a href="{{ route('house.show', $item->slug) }}">{{ $item->title }}</a></h3>
-                                        <div class="flex justify-between text-sm text-green-dark mb-6">
-                                            <span>{{ $item->area_total }} м²</span>
-                                            <span>Этажей: {{ $item->floor_count }}</span>
-                                            <span>от {{ number_format($item->price, 0, '.', ' ') }} ₽</span>
-                                        </div>
-                                        <a href="{{ route('house.show', $item->slug) }}" class="bg-primary hover:bg-primary-dark text-white-custom px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                                            Подробнее
-                                        </a>
-                                    </div>
-                        </div>
+                                
+                                <x-house-card :house="$item" :showSchema="true" />
                             </div>
                         @endforeach
                     </div>
@@ -190,21 +176,8 @@
                     <div class="swiper-wrapper">
                         @foreach($reviews as $item)
                             <div class="swiper-slide !h-auto">
-                                <div class="bg-white rounded-lg p-8 h-full shadow-md">
-                                    <div class="flex items-center mb-6">
-                                        @if($item->hasMedia('main'))
-                                        <div class="w-16 h-16 bg-cover bg-center rounded-full mr-4" style="background-image: url('{{ $item->getFirstMediaUrl('main') }}');"></div>
-                                        @else
-                                        <div class="w-16 h-16 bg-cover bg-center rounded-full mr-4" style="background-image: url('{{ asset('images/user.png') }}');"></div>
-                                        @endif
-                                        <div>
-                                            <h4 class="font-semibold text-secondary">{{ $item->author }}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="text-accent leading-relaxed italic">
-                                        {{ $item->text }}
-                                    </div>
-                                </div>
+                                <x-review-schema :review="$item" />
+                            
                             </div>
                         @endforeach
                     </div>

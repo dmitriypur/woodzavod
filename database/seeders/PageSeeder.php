@@ -18,7 +18,7 @@ class PageSeeder extends Seeder
             'slug' => 'about',
             'title' => 'О компании',
             'content' => '<div class="space-y-6">
-                <p>Компания «WoodZavod» — это современное производство деревянных домов из бруса, основанное в 2010 году. За это время мы построили более 500 домов по всей России.</p>
+                <p>Компания «Деревянное домостроение» — это современное производство деревянных домов из бруса, основанное в 2010 году. За это время мы построили более 500 домов по всей России.</p>
                 
                 <h2 class="text-2xl font-semibold">Наши преимущества</h2>
                 
@@ -61,7 +61,7 @@ class PageSeeder extends Seeder
                     
                     <p><strong>Адрес:</strong> г. Москва, ул. Примерная, д. 123</p>
                     <p><strong>Телефон:</strong> +7 (XXX) XXX-XX-XX</p>
-                    <p><strong>Email:</strong> info@woodzavod.ru</p>
+                    <p><strong>Email:</strong> info@Деревянное домостроение.ru</p>
                     <p><strong>Режим работы:</strong> Пн-Пт с 9:00 до 18:00, Сб-Вс выходной</p>
                 </div>
                 

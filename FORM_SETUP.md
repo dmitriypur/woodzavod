@@ -17,11 +17,11 @@ MAIL_PORT=587
 MAIL_USERNAME=your-email@gmail.com
 MAIL_PASSWORD=your-app-password
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=noreply@woodzavod.ru
-MAIL_FROM_NAME="WoodZavod"
+MAIL_FROM_ADDRESS=noreply@Деревянное домостроение.ru
+MAIL_FROM_NAME="Деревянное домостроение"
 
 # Email для получения уведомлений
-ADMIN_EMAIL=admin@woodzavod.ru
+ADMIN_EMAIL=admin@Деревянное домостроение.ru
 ```
 
 ### 2. Для Gmail:

@@ -10,7 +10,16 @@
     @if(isset($house->seo['noindex']) && !!$house->seo['noindex'])
         <meta name="robots" content="noindex">
     @endif
+@endpush
 
+@push('schema-org')
+    @inject('schemaService', 'App\Services\SchemaOrgService')
+    {!! $schemaService->generateHouseProduct($house) !!}
+    {!! $schemaService->generateBreadcrumbs([
+        ['name' => 'Главная', 'url' => url('/')],
+        ['name' => 'Каталог', 'url' => route('catalog')],
+        ['name' => $house->title, 'url' => route('house.show', $house->slug)]
+    ]) !!}
 @endpush
 @extends('layouts.app')
 
@@ -20,6 +29,7 @@
 @section('og_description', \App\Helpers\SettingsHelper::replaceVariables($house->seo['description'] ?? ''))
 
 @section('content')
+
 <div class="bg-white py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Хлебные крошки -->
@@ -213,15 +223,7 @@
                 <h2 class="text-2xl font-semibold text-gray-900 mb-6">Отзывы</h2>
                 <div class="space-y-6">
                     @foreach($reviews as $review)
-                        <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h4 class="text-lg font-semibold text-gray-900">{{ $review->author }}</h4>
-                                    <span class="text-gray-500 text-sm">{{ $review->created_at->format('d.m.Y') }}</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">{{ $review->text }}</p>
-                        </div>
+                        <x-review-schema :review="$review" />
                     @endforeach
                 </div>
             </div>
@@ -282,7 +284,7 @@
     },
     "brand": {
         "@type": "Brand",
-        "name": "WoodZavod"
+        "name": "Деревянное домостроение"
     }
 }
 </script>

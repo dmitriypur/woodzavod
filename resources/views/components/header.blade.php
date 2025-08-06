@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center mb-4 md:mb-0">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">WoodZavod</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">Деревянное домостроение</span>
                 </a>
             </div>
             

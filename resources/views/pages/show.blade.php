@@ -1,3 +1,5 @@
+@inject('schemaService', 'App\Services\SchemaOrgService')
+
 @push('header-scripts')
     @if(isset($page->seo['canonical']) && $page->seo['canonical'] !== '')
         <link rel="canonical"
@@ -11,6 +13,15 @@
         <meta name="robots" content="noindex">
     @endif
 @endpush
+
+@push('schema-org-footer')
+    {!! $schemaService->generateWebPage($page->title, $page->content, route('page.show', $page->slug)) !!}
+    {!! $schemaService->generateBreadcrumbs([
+        ['name' => 'Главная', 'url' => url('/')],
+        ['name' => $page->title, 'url' => route('page.show', $page->slug)]
+    ]) !!}
+@endpush
+
 @extends('layouts.app')
 
 @section('title', \App\Helpers\SettingsHelper::replaceVariables($page->seo['title'] ?? $page->title))
@@ -22,11 +33,12 @@
 <div class="bg-white pt-40 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Хлебные крошки -->
-        <nav class="flex mb-6" aria-label="Breadcrumb">
+        <nav class="flex mb-6" aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="{{ url('/') }}" class="text-gray-600 hover:text-gray-900">
-                        Главная
+                <li class="inline-flex items-center" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <meta itemprop="position" content="1">
+                    <a href="{{ url('/') }}" class="text-gray-600 hover:text-gray-900" itemprop="item">
+                        <span itemprop="name">Главная</span>
                     </a>
                 </li>
                 <li aria-current="page">
@@ -88,7 +100,7 @@
                                     </svg>
                                     <div>
                                         <span class="block font-medium text-gray-900">Email</span>
-                                        <a href="mailto:info@woodzavod.ru" class="text-gray-600 hover:text-gray-900">info@woodzavod.ru</a>
+                                        <a href="mailto:info@Деревянное домостроение.ru" class="text-gray-600 hover:text-gray-900">info@Деревянное домостроение.ru</a>
                                     </div>
                                 </li>
                                 <li class="flex items-start">
