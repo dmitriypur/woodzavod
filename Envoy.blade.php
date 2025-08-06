@@ -130,6 +130,7 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 php artisan event:cache
+php artisan sitemap:generate --force
 
 sudo service php8.3-fpm restart
 @endtask

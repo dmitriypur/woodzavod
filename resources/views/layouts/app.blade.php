@@ -17,6 +17,8 @@
     <meta property="og:url" content="{{ url()->current() }}"/>
     <meta property="og:site_name" content="Деревянное домостроение"/>
 
+    <meta name="yandex-verification" content="aba90bdb97154269" />
+
     <meta name="twitter:title" content="@yield('og_title', 'Деревянные дома от производителя')"/>
     <meta name="twitter:description" content="@yield('og_description', '✅ Каталог готовых проектов деревянных домов от производителя. Дома из бруса под ключ с гарантией качества. Цены от застройщика без переплат. Бесплатная консультация!')"/>
 
