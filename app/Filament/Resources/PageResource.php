@@ -16,8 +16,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Notifications\Notification;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class PageResource extends Resource
+class PageResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Page::class;
     protected static ?string $label = 'Страница';
@@ -169,6 +170,18 @@ class PageResource extends Resource
             'index' => Pages\ListPages::route('/'),
             'create' => Pages\CreatePage::route('/create'),
             'edit' => Pages\EditPage::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
         ];
     }
 }

@@ -12,8 +12,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class LeadResource extends Resource
+class LeadResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Lead::class;
 
@@ -114,6 +115,18 @@ class LeadResource extends Resource
             'index' => Pages\ListLeads::route('/'),
             'create' => Pages\CreateLead::route('/create'),
             'edit' => Pages\EditLead::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
         ];
     }
 }

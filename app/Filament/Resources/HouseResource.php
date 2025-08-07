@@ -18,11 +18,12 @@ use Filament\Notifications\Notification;
 use Illuminate\Support\Collection;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
-class HouseResource extends Resource
+class HouseResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = House::class;
     protected static ?string $label = 'Дом';
@@ -281,6 +282,18 @@ class HouseResource extends Resource
             'index' => Pages\ListHouses::route('/'),
             'create' => Pages\CreateHouse::route('/create'),
             'edit' => Pages\EditHouse::route('/{record}/edit'),
+        ];
+    }
+    
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
         ];
     }
 }

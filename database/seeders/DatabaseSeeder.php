@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
         
-        // Заполнение статических страниц
+        // Заполнение ролей и разрешений
         $this->call([
+            RoleSeeder::class,
             PageSeeder::class,
         ]);
     }

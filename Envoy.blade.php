@@ -115,9 +115,18 @@ php artisan backup:run
 @endtask
 
 @task('migrateDatabase', ['on' => 'remote'])
-{{ logMessage("🙈  Migrating database...") }}
+{{ logMessage("🙈  Migrating database and setting up permissions...") }}
 cd {{ $newReleaseDir }}
 php artisan migrate --force
+
+# Check if shield:setup has already been run
+if [ ! -f {{ $baseDir }}/storage/.shield-setup-done ]; then
+    php artisan shield:setup
+    touch {{ $baseDir }}/storage/.shield-setup-done
+    echo "Shield setup completed and marked as done"
+else
+    echo "Shield setup already completed, skipping..."
+fi
 @endtask
 
 @task('blessNewRelease', ['on' => 'remote'])

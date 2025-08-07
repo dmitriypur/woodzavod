@@ -8,8 +8,9 @@ use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class ManageSitemap extends Page
+class ManageSitemap extends Page implements HasShieldPermissions
 {
     protected static ?string $navigationIcon = 'heroicon-o-map';
     
@@ -65,10 +66,10 @@ class ManageSitemap extends Page
                         
                         if ($exitCode === 0) {
                             Log::info('Manual sitemap regeneration successful from Filament admin', [
-                                'user_id' => auth()->id(),
-                                'timestamp' => now(),
-                                'output' => $output
-                            ]);
+                            'user_id' => auth()->user()?->id,
+                            'timestamp' => now(),
+                            'output' => $output
+                        ]);
                             
                             Notification::make()
                                 ->title('Успешно!')
@@ -86,7 +87,7 @@ class ManageSitemap extends Page
                     } catch (\Exception $e) {
                         Log::error('Manual sitemap regeneration failed from Filament admin', [
                             'error' => $e->getMessage(),
-                            'user_id' => auth()->id(),
+                            'user_id' => auth()->user()?->id,
                             'timestamp' => now(),
                             'app_url' => config('app.url'),
                             'public_path' => public_path(),
@@ -115,7 +116,7 @@ class ManageSitemap extends Page
                         Cache::forget('sitemap_' . md5('/robots.txt'));
                         
                         Log::info('Sitemap cache cleared from Filament admin', [
-                            'user_id' => auth()->id(),
+                            'user_id' => auth()->user()?->id,
                             'timestamp' => now()
                         ]);
                         
@@ -128,7 +129,7 @@ class ManageSitemap extends Page
                     } catch (\Exception $e) {
                         Log::error('Failed to clear sitemap cache from Filament admin', [
                             'error' => $e->getMessage(),
-                            'user_id' => auth()->id(),
+                            'user_id' => auth()->user()?->id,
                             'timestamp' => now()
                         ]);
                         
@@ -149,7 +150,7 @@ class ManageSitemap extends Page
                         $output = Artisan::output();
                         
                         Log::info('Sitemap environment test from Filament admin', [
-                            'user_id' => auth()->id(),
+                            'user_id' => auth()->user()?->id,
                             'timestamp' => now(),
                             'exit_code' => $exitCode,
                             'output' => $output
@@ -172,7 +173,7 @@ class ManageSitemap extends Page
                     } catch (\Exception $e) {
                         Log::error('Failed to run sitemap environment test', [
                             'error' => $e->getMessage(),
-                            'user_id' => auth()->id(),
+                            'user_id' => auth()->user()?->id,
                             'timestamp' => now()
                         ]);
                         
@@ -183,6 +184,13 @@ class ManageSitemap extends Page
                             ->send();
                     }
                 })
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
         ];
     }
 }

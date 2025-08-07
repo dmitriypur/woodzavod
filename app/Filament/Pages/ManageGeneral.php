@@ -7,8 +7,9 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 use Filament\Forms\Components\TextInput;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class ManageGeneral extends SettingsPage
+class ManageGeneral extends SettingsPage implements HasShieldPermissions
 {
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
@@ -54,5 +55,12 @@ class ManageGeneral extends SettingsPage
                         ->nullable(),
                 ]),
             ]);
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+        ];
     }
 }

@@ -13,8 +13,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Collection;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class ReviewResource extends Resource
+class ReviewResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Review::class;
 
@@ -193,6 +194,18 @@ class ReviewResource extends Resource
             'index' => Pages\ListReviews::route('/'),
             'create' => Pages\CreateReview::route('/create'),
             'edit' => Pages\EditReview::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
         ];
     }
 }

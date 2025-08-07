@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\GenerateSitemap;
+use App\Console\Commands\SetupShield;
 use App\Console\Commands\TestSitemapEnvironment;
 use App\Console\Commands\TestTelegramCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         TestTelegramCommand::class,
         GenerateSitemap::class,
         TestSitemapEnvironment::class,
+        SetupShield::class,
     ];
 
     /**

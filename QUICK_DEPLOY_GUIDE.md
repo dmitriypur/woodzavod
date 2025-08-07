@@ -49,16 +49,31 @@
    - Файлы: 644
    - `storage/` и `bootstrap/cache/`: 777 (рекурсивно)
 
-6. **Настройте базу данных:**
+6. **Настройте Shield (система разрешений):**
+   ```bash
+   # Через SSH или Terminal в cPanel
+   cd /path/to/your/site
+   php artisan shield:setup
+   ```
+   
+   Или выполните команды по отдельности:
+   ```bash
+   php artisan migrate --force
+   php artisan shield:generate --all
+   php artisan shield:super-admin --user=1
+   php artisan cache:clear
+   ```
+
+7. **Настройте базу данных:**
    - Создайте БД через cPanel
    - Импортируйте дамп или выполните миграции
 
-7. **Создайте администратора:**
+8. **Создайте администратора:**
    - Откройте `https://yourdomain.com/create-admin.php`
    - Заполните форму
    - **УДАЛИТЕ файл после использования!**
 
-8. **Проверьте работу:**
+9. **Проверьте работу:**
    - Основной сайт: `https://yourdomain.com`
    - Админка: `https://yourdomain.com/admin`
 
