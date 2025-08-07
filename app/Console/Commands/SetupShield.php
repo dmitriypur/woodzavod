@@ -26,7 +26,7 @@ class SetupShield extends Command
             // Создаем супер-администратора
             $userId = $this->option('user-id');
             $this->info('👑 Создание супер-администратора...');
-            Artisan::call('shield:super-admin', ['--user' => $userId]);
+            Artisan::call('shield:super-admin', ['user' => $userId]);
             $this->line('✅ Супер-администратор создан для пользователя ID: ' . $userId);
             
             // Очищаем кеш
