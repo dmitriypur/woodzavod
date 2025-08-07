@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://127.0.0.1:8000</loc>
-        <lastmod>2025-08-06T12:06:18.243180Z</lastmod>
+        <loc>http://127.0.0.1:8000/</loc>
+        <lastmod>2025-08-07T11:20:00.153931Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
