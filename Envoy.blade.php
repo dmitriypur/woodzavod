@@ -132,7 +132,7 @@ fi
 @task('blessNewRelease', ['on' => 'remote'])
 {{ logMessage("🙏  Blessing new release...") }}
 ln -nfs {{ $newReleaseDir }} {{ $currentDir }}
-cd {{ $newReleaseDir }}
+cd {{ $currentDir }}
 
 php artisan view:clear
 php artisan config:clear
@@ -140,9 +140,6 @@ php artisan cache:clear
 php artisan config:cache
 php artisan event:cache
 php artisan sitemap:generate --force
-
-{{ logMessage($currentDir) }}
-{{ logMessage($newReleaseDir) }}
 
 sudo service php8.3-fpm restart
 @endtask
