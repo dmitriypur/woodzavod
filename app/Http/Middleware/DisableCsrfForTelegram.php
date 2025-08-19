@@ -16,7 +16,7 @@ class DisableCsrfForTelegram
     public function handle(Request $request, Closure $next)
     {
         // отключаем CSRF для Telegram webhook
-        if ($request->is('leads')) {
+        if ($request->is('submit-form')) {
             return $next($request);
         }
 
