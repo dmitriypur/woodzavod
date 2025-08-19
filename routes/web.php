@@ -16,7 +16,7 @@ Route::get('/catalog', [HouseController::class, 'index'])->name('catalog');
 Route::get('/catalog/{slug}', [HouseController::class, 'show'])->name('house.show');
 
 // Маршрут для обработки заявок
-Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
+Route::post('/leads', [LeadController::class, 'store'])->withoutMiddleware([\App\Http\Middleware\DisableCsrfForTelegram::class])->name('leads.store');
 
 // Маршрут для AJAX отправки форм
 Route::post('/submit-form', [LeadController::class, 'submitForm'])->name('submit.form');
