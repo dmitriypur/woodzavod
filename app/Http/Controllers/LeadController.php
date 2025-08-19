@@ -190,54 +190,55 @@ class LeadController extends Controller
             $chatId = env('TELEGRAM_CHAT_ID');
 
             if (!$botToken || !$chatId) {
-                Log::warning('Telegram credentials not configured');
+                Log::warning('Telegram credentials not configured', [
+                    'bot_token_exists' => !empty($botToken),
+                    'chat_id_exists' => !empty($chatId),
+                    'lead_id' => $lead->id
+                ]);
                 return;
             }
 
-            Log::info('Sending Telegram notification', [
-                'bot_token_exists' => !empty($botToken),
-                'chat_id' => $chatId,
-                'lead_id' => $lead->id
-            ]);
+            $houseName = $lead->house ? htmlspecialchars($lead->house->title) : 'Не указан';
+            $name = htmlspecialchars($lead->name);
+            $phone = htmlspecialchars($lead->phone);
+            $email = $lead->email ? htmlspecialchars($lead->email) : null;
+            $messageText = $lead->message ? htmlspecialchars($lead->message) : null;
 
-            $houseName = $lead->house ? $lead->house->title : 'Не указан';
-
-            $message = "🏠 *Новая заявка с сайта \"Деревянное домостроение\"*\n\n";
-            $message .= "👤 *Имя:* {$lead->name}\n";
-            $message .= "📞 *Телефон:* {$lead->phone}\n";
-            if ($lead->email) {
-                $message .= "📧 *Email:* {$lead->email}\n";
-            }
-            $message .= "🏡 *Дом:* {$houseName}\n";
-            if ($lead->message) {
-                $message .= "💬 *Сообщение:* {$lead->message}\n";
-            }
-            $message .= "⏰ *Время:* " . $lead->created_at->format('d.m.Y H:i');
+            $message = "<b>🏠 Новая заявка с сайта \"Деревянное домостроение\"</b>\n\n";
+            $message .= "<b>👤 Имя:</b> {$name}\n";
+            $message .= "<b>📞 Телефон:</b> {$phone}\n";
+            if ($email) $message .= "<b>📧 Email:</b> {$email}\n";
+            $message .= "<b>🏡 Дом:</b> {$houseName}\n";
+            if ($messageText) $message .= "<b>💬 Сообщение:</b> {$messageText}\n";
+            $message .= "<b>⏰ Время:</b> " . $lead->created_at->format('d.m.Y H:i');
 
             $response = Http::timeout(30)->post("https://api.telegram.org/bot{$botToken}/sendMessage", [
                 'chat_id' => $chatId,
                 'text' => $message,
-                'parse_mode' => 'Markdown'
+                'parse_mode' => 'HTML'
             ]);
 
             if ($response->successful()) {
                 Log::info('Telegram message sent successfully', [
                     'lead_id' => $lead->id,
-                    'response_status' => $response->status()
+                    'response_status' => $response->status(),
+                    'response_body' => $response->body()
                 ]);
             } else {
                 Log::error('Telegram API error', [
                     'lead_id' => $lead->id,
                     'status' => $response->status(),
-                    'response' => $response->body()
+                    'response_body' => $response->body()
                 ]);
             }
+
         } catch (\Exception $e) {
-            Log::error('Telegram sending error', [
+            Log::error('Telegram sending exception', [
                 'lead_id' => $lead->id,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'exception_message' => $e->getMessage(),
+                'exception_trace' => $e->getTraceAsString()
             ]);
         }
     }
+
 }
