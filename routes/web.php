@@ -19,7 +19,7 @@ Route::get('/catalog/{slug}', [HouseController::class, 'show'])->name('house.sho
 Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
 
 // Маршрут для AJAX отправки форм
-Route::post('/submit-form', [LeadController::class, 'submitForm'])->withoutMiddleware([\App\Http\Middleware\DisableCsrfForTelegram::class])->name('submit.form');
+Route::post('/submit-form', [LeadController::class, 'submitForm'])->name('submit.form');
 
 // Карты сайта
 Route::middleware('cache.sitemap')->group(function () {

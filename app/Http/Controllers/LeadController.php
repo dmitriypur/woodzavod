@@ -94,7 +94,7 @@ class LeadController extends Controller
 
         } catch (\Exception $e) {
             Log::error('Form submission error: ' . $e->getMessage());
-            
+
             return response()->json([
                 'success' => false,
                 'message' => 'Произошла ошибка при отправке заявки. Попробуйте позже.'
@@ -112,7 +112,7 @@ class LeadController extends Controller
     {
         try {
             $adminEmail = env('ADMIN_EMAIL', 'admin@Деревянное домостроение.ru');
-            
+
             Mail::send('emails.new-lead', ['lead' => $lead], function ($message) use ($adminEmail, $lead) {
                 $message->to($adminEmail)
                         ->subject('Новая заявка с сайта Деревянное домостроение')
@@ -133,7 +133,7 @@ class LeadController extends Controller
         try {
             $botToken = env('TELEGRAM_BOT_TOKEN');
             $chatId = env('TELEGRAM_CHAT_ID');
-            
+
             if (!$botToken || !$chatId) {
                 return [
                     'success' => false,
@@ -145,7 +145,7 @@ class LeadController extends Controller
 
             // Проверяем бота
             $botResponse = Http::timeout(10)->get("https://api.telegram.org/bot{$botToken}/getMe");
-            
+
             if (!$botResponse->successful()) {
                 return [
                     'success' => false,
@@ -188,7 +188,7 @@ class LeadController extends Controller
         try {
             $botToken = env('TELEGRAM_BOT_TOKEN');
             $chatId = env('TELEGRAM_CHAT_ID');
-            
+
             if (!$botToken || !$chatId) {
                 Log::warning('Telegram credentials not configured');
                 return;
@@ -201,7 +201,7 @@ class LeadController extends Controller
             ]);
 
             $houseName = $lead->house ? $lead->house->title : 'Не указан';
-            
+
             $message = "🏠 *Новая заявка с сайта \"Деревянное домостроение\"*\n\n";
             $message .= "👤 *Имя:* {$lead->name}\n";
             $message .= "📞 *Телефон:* {$lead->phone}\n";

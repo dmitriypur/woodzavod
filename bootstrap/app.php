@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'cache.sitemap' => \App\Http\Middleware\CacheSitemap::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            'submit-form',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, \Illuminate\Http\Request $request) {
