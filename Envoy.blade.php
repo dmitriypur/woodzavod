@@ -135,11 +135,12 @@ ln -nfs {{ $newReleaseDir }} {{ $currentDir }}
 cd {{ $currentDir }}
 
 php artisan view:clear
-php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 php artisan event:cache
 php artisan sitemap:generate --force
+php artisan config:cache
+php artisan config:clear
 
 sudo service php8.3-fpm restart
 @endtask
