@@ -140,7 +140,9 @@ php artisan cache:clear
 php artisan config:cache
 php artisan event:cache
 php artisan sitemap:generate --force
-php artisan cache:clear
+
+{{ logMessage($currentDir) }}
+{{ logMessage($newReleaseDir) }}
 
 sudo service php8.3-fpm restart
 @endtask
