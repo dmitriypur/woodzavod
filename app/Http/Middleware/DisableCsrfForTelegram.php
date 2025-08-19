@@ -13,8 +13,13 @@ class DisableCsrfForTelegram
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
+        // отключаем CSRF для Telegram webhook
+        if ($request->is('leads')) {
+            return $next($request);
+        }
+
         return $next($request);
     }
 }
